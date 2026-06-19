@@ -1,14 +1,32 @@
+import Image from "next/image";
 import Link from "next/link";
+import { HeroSearch } from "@/components/home/HeroSearch";
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-screen flex-col justify-center bg-charcoal-hero">
+    <section className="relative flex h-dvh snap-start snap-always flex-col justify-center overflow-hidden bg-charcoal-hero">
+      {/* Background image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/hero-cape-town.jpg"
+          alt="Luxury property overlooking Cape Town coastline at dusk"
+          fill
+          priority
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+      </div>
+
+      {/* Dim overlay */}
+      <div className="hero-dim pointer-events-none absolute inset-0 z-[1]" aria-hidden="true" />
+
+      {/* Gradient depth on top of dim */}
       <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-charcoal-deep/80 via-charcoal-hero to-charcoal-deep"
+        className="hero-dim-gradient pointer-events-none absolute inset-0 z-[2]"
         aria-hidden="true"
       />
 
-      <div className="relative mx-auto w-full max-w-7xl px-4 pb-24 pt-32 sm:px-6 lg:px-8 lg:pt-40">
+      <div className="page-container relative z-10 overflow-visible pb-16 pt-32 lg:pb-20 lg:pt-40">
         <p className="section-label text-gold-light">Premium Real Estate</p>
 
         <h1 className="mt-4 max-w-3xl font-serif text-display-lg text-hero-text sm:text-display-xl">
@@ -22,23 +40,16 @@ export function Hero() {
           viewings, and invest with confidence.
         </p>
 
-        <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-          <Link href="/gallery" className="btn-primary">
+        <HeroSearch />
+
+        <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:gap-4">
+          <Link href="/gallery" className="btn-hero-browse">
             Browse Collection
             <span aria-hidden="true">&rarr;</span>
           </Link>
-          <Link
-            href="/booking"
-            className="inline-flex items-center justify-center gap-2 rounded-md border border-hero-text/25 bg-hero-text/10 px-6 py-3 text-sm font-semibold text-hero-text backdrop-blur-sm transition-colors hover:bg-hero-text/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-light"
-          >
+          <Link href="/booking" className="btn-hero-glass">
             Book a Private Viewing
           </Link>
-        </div>
-      </div>
-
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2" aria-hidden="true">
-        <div className="flex h-10 w-6 items-start justify-center rounded-full border border-hero-text/30 p-1">
-          <div className="h-2 w-1 animate-bounce rounded-full bg-gold-light" />
         </div>
       </div>
     </section>

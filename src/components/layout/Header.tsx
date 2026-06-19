@@ -23,7 +23,8 @@ export function Header() {
     setMenuOpen(false);
   }, [pathname]);
 
-  const overHero = !scrolled;
+  const isHome = pathname === "/";
+  const overHero = isHome && !scrolled;
   const linkColor = overHero
     ? "text-hero-text/90 hover:text-hero-text"
     : "text-foreground hover:text-foreground";
@@ -45,7 +46,7 @@ export function Header() {
           scrolled ? "nav-glass" : "nav-transparent"
         }`}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+        <div className="page-container flex items-center justify-between py-4">
           <Logo scrolled={scrolled} />
 
           <nav
@@ -121,13 +122,14 @@ export function Header() {
         {menuOpen && (
           <nav
             id="mobile-nav"
-            className={`border-t px-4 py-4 lg:hidden ${
+            className={`border-t lg:hidden ${
               scrolled
                 ? "nav-glass border-border/30"
                 : "border-hero-text/10 bg-charcoal-hero/95 backdrop-blur-glass"
             }`}
             aria-label="Mobile navigation"
           >
+            <div className="page-container py-4">
             <ul className="flex flex-col gap-1">
               {NAV_LINKS.map(({ href, label }) => {
                 const isActive = pathname === href;
@@ -162,6 +164,7 @@ export function Header() {
                 </Link>
               </li>
             </ul>
+            </div>
           </nav>
         )}
       </header>

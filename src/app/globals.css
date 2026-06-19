@@ -20,6 +20,15 @@
   --border: rgba(26, 26, 26, 0.12);
   --overlay: rgba(0, 0, 0, 0.4);
   --hero-text: #ffffff;
+  --hero-search: rgba(255, 255, 255, 0.32);
+  --hero-dim: rgba(0, 0, 0, 0.55);
+  --search-green: #1a3c2f;
+  --search-green-hover: #142f24;
+  --dropdown-cream: #faf9f6;
+  --dropdown-active: #91765d;
+  --dropdown-text: #2d2926;
+  --brown-light: #fbf8f4;
+  --why-section-bg: #f3ece3;
 }
 
 /* ─── Dark mode ─── */
@@ -41,6 +50,15 @@
   --border: rgba(255, 255, 255, 0.1);
   --overlay: rgba(0, 0, 0, 0.55);
   --hero-text: #ffffff;
+  --hero-search: rgba(255, 255, 255, 0.32);
+  --hero-dim: rgba(0, 0, 0, 0.65);
+  --search-green: #1a3c2f;
+  --search-green-hover: #142f24;
+  --dropdown-cream: #faf9f6;
+  --dropdown-active: #91765d;
+  --dropdown-text: #2d2926;
+  --brown-light: #fbf8f4;
+  --why-section-bg: #f3ece3;
 }
 
 @theme inline {
@@ -74,6 +92,15 @@
   --color-nav-active-scrolled: var(--nav-active-scrolled);
   --color-overlay: var(--overlay);
   --color-hero-text: var(--hero-text);
+  --color-hero-search: var(--hero-search);
+  --color-hero-dim: var(--hero-dim);
+  --color-search-green: var(--search-green);
+  --color-search-green-hover: var(--search-green-hover);
+  --color-dropdown-cream: var(--dropdown-cream);
+  --color-dropdown-active: var(--dropdown-active);
+  --color-dropdown-text: var(--dropdown-text);
+  --color-brown-light: var(--brown-light);
+  --color-why-section-bg: var(--why-section-bg);
   --color-border: var(--border);
 
   --font-sans: var(--font-inter);
@@ -91,12 +118,15 @@
   }
 
   h1,
-  h2,
   h3,
   h4,
   h5,
   h6 {
     @apply font-display font-bold tracking-tight text-foreground;
+  }
+
+  h2 {
+    @apply tracking-tight text-foreground;
   }
 
   ::selection {
@@ -106,7 +136,7 @@
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-md bg-bronze px-6 py-3 text-sm font-semibold text-hero-text transition-colors duration-200 hover:bg-bronze-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-bronze px-6 py-3 text-sm font-semibold text-hero-text transition-colors duration-200 hover:bg-bronze-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze;
   }
 
   .btn-booking {
@@ -129,8 +159,76 @@
     @apply text-label font-display font-semibold uppercase tracking-widest text-accent-secondary;
   }
 
+  .page-container {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
   .glass-panel {
     @apply rounded-lg border border-border bg-overlay backdrop-blur-nav;
+  }
+
+  .hero-dim {
+    @apply bg-hero-dim;
+  }
+
+  .hero-dim-gradient {
+    @apply bg-gradient-to-r from-charcoal-deep/70 via-charcoal-hero/40 to-transparent;
+  }
+
+  .hero-search-bar {
+    @apply flex h-14 items-center overflow-visible rounded-xl border border-white/25 bg-hero-search py-1.5 pl-5 pr-1.5 backdrop-blur-xl;
+  }
+
+  .hero-search-divider {
+    @apply mx-3 h-5 w-px shrink-0 bg-foreground/20;
+  }
+
+  .hero-dropdown-trigger {
+    @apply flex w-auto min-w-0 items-center gap-2 bg-transparent py-1 text-left focus:outline-none;
+  }
+
+  .hero-dropdown-menu {
+    @apply absolute bottom-[calc(100%+0.25rem)] left-0 z-50 w-full min-w-[11.5rem] rounded-2xl border border-white bg-dropdown-cream p-1 shadow-elevated;
+  }
+
+  .hero-dropdown-option {
+    @apply w-full rounded-xl px-4 py-2.5 text-left text-[0.9375rem] leading-normal tracking-normal text-dropdown-text transition-all duration-150;
+  }
+
+  .hero-dropdown-option-active {
+    @apply bg-dropdown-active font-medium text-hero-text;
+  }
+
+  .property-type-badge {
+    @apply absolute left-3 top-3 rounded-full bg-gold-light px-3 py-1 text-[0.6875rem] font-sans font-bold uppercase leading-none tracking-wide text-hero-text;
+  }
+
+  .property-favorite-btn {
+    @apply absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-lg border border-white/20 bg-white/35 text-hero-text shadow-sm backdrop-blur-sm transition-colors duration-200 hover:bg-white/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60;
+  }
+
+  .why-us-card {
+    @apply flex h-auto min-h-[11.25rem] w-full flex-col rounded-2xl border border-border/50 bg-white px-6 py-5 shadow-[0_4px_20px_rgba(26,26,26,0.06)] sm:h-[11.75rem] sm:min-h-0 sm:px-7 sm:py-6;
+  }
+
+  .testimonial-card {
+    @apply flex h-full min-h-[17.5rem] w-full flex-col rounded-2xl border border-white/10 bg-charcoal-deep/80 px-6 py-7 sm:min-h-[18.5rem] sm:px-7 sm:py-8;
+  }
+
+  .btn-search {
+    @apply inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-xl bg-charcoal-deep px-5 text-sm font-semibold text-hero-text transition-colors duration-200 hover:bg-charcoal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-charcoal-deep;
+  }
+
+  .btn-filter {
+    @apply inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-charcoal-deep text-hero-text transition-colors duration-200 hover:bg-charcoal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-charcoal-deep;
+  }
+
+  .btn-hero-browse {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-gold-light px-6 py-3 text-sm font-semibold text-foreground transition-colors duration-200 hover:bg-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-light;
+  }
+
+  .btn-hero-glass {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-white/25 bg-hero-search px-6 py-3 text-sm font-semibold text-foreground backdrop-blur-xl transition-colors duration-200 hover:bg-white/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50;
   }
 
   .section-dark {
@@ -144,6 +242,22 @@
 
   .nav-transparent {
     @apply border-b border-transparent bg-transparent;
+  }
+
+  .contact-form-card {
+    @apply rounded-2xl border border-border/35 bg-surface p-6 shadow-[0_8px_32px_rgba(26,26,26,0.07)] sm:p-8 lg:p-9;
+  }
+
+  .contact-label {
+    @apply mb-2.5 block text-sm font-semibold tracking-tight text-foreground;
+  }
+
+  .contact-field {
+    @apply w-full rounded-xl border border-border/50 bg-white px-4 py-3 text-sm text-foreground shadow-[inset_0_1px_2px_rgba(26,26,26,0.04)] placeholder:text-muted/50 transition-all duration-200 focus:border-bronze/50 focus:outline-none focus:ring-2 focus:ring-bronze/15;
+  }
+
+  .contact-info-icon {
+    @apply flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border/30 bg-white text-gold-light shadow-[0_2px_8px_rgba(26,26,26,0.06)];
   }
 }
 

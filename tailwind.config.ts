@@ -52,6 +52,17 @@ const config: Config = {
         "nav-active-scrolled": "var(--nav-active-scrolled)",
         overlay: "var(--overlay)",
         "hero-text": "var(--hero-text)",
+        "hero-search": "var(--hero-search)",
+        "hero-dim": "var(--hero-dim)",
+        "search-green": {
+          DEFAULT: "var(--search-green)",
+          hover: "var(--search-green-hover)",
+        },
+        "dropdown-cream": "var(--dropdown-cream)",
+        "dropdown-active": "var(--dropdown-active)",
+        "dropdown-text": "var(--dropdown-text)",
+        "brown-light": "var(--brown-light)",
+        "why-section-bg": "var(--why-section-bg)",
         border: "var(--border)",
       },
       fontFamily: {

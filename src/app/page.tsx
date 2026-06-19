@@ -1,24 +1,29 @@
-import { Header } from "@/components/layout/Header";
+import { AreasSection } from "@/components/home/AreasSection";
 import { Hero } from "@/components/home/Hero";
+import { HeroStats } from "@/components/home/HeroStats";
+import { CtaSection } from "@/components/home/CTASection";
+import { TestimonialsSection } from "@/components/home/TestimonialsSection";
+import { WhyUsSection } from "@/components/home/WhyUsSection";
+import { Footer } from "@/components/layout/Footer";
+import { Header } from "@/components/layout/Header";
 
 export default function HomePage() {
   return (
     <>
       <Header />
-      <Hero />
-
-      {/* Spacer content to demo scroll glass effect */}
-      <section className="bg-background px-4 py-24 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-3xl font-display font-bold text-foreground">
-            Scroll to see the mirror glass nav
-          </h2>
-          <p className="mt-4 text-muted">
-            The navigation bar stays fixed at the top and transitions to a
-            frosted glass effect as you scroll past the hero section.
-          </p>
-        </div>
-      </section>
+      <main className="snap-y snap-mandatory">
+        <Hero />
+        <section className="snap-start bg-charcoal py-10 sm:py-12">
+          <div className="page-container">
+            <HeroStats />
+          </div>
+        </section>
+        <AreasSection />
+        <WhyUsSection />
+        <TestimonialsSection />
+        <CtaSection />
+      </main>
+      <Footer />
     </>
   );
 }
