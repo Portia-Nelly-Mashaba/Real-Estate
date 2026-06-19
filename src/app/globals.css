@@ -1,26 +1,158 @@
 @import "tailwindcss";
+@config "../../tailwind.config.ts";
 
+/* ─── Light mode ─── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fdfbf7;
+  --foreground: #1a1a1a;
+  --surface: #f7f3ef;
+  --muted: #4a4a4a;
+  --accent: #9a7b5f;
+  --accent-hover: #8a6b4f;
+  --accent-secondary: #7d5d3f;
+  --charcoal: #121212;
+  --hero-charcoal: #36454f;
+  --hero-charcoal-deep: #2c3a42;
+  --nav-glass: rgba(255, 255, 255, 0.38);
+  --nav-glass-border: rgba(255, 255, 255, 0.55);
+  --nav-active: rgba(255, 255, 255, 0.15);
+  --nav-active-scrolled: rgba(26, 26, 26, 0.08);
+  --border: rgba(26, 26, 26, 0.12);
+  --overlay: rgba(0, 0, 0, 0.4);
+  --hero-text: #ffffff;
+}
+
+/* ─── Dark mode ─── */
+.dark {
+  --background: #0f0f0f;
+  --foreground: #ffffff;
+  --surface: #1a1a1a;
+  --muted: #cccccc;
+  --accent: #c1a47e;
+  --accent-hover: #d4b896;
+  --accent-secondary: #9a7b5f;
+  --charcoal: #0a0a0a;
+  --hero-charcoal: #36454f;
+  --hero-charcoal-deep: #2c3a42;
+  --nav-glass: rgba(20, 20, 20, 0.45);
+  --nav-glass-border: rgba(255, 255, 255, 0.12);
+  --nav-active: rgba(255, 255, 255, 0.1);
+  --nav-active-scrolled: rgba(255, 255, 255, 0.08);
+  --border: rgba(255, 255, 255, 0.1);
+  --overlay: rgba(0, 0, 0, 0.55);
+  --hero-text: #ffffff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-surface: var(--surface);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-charcoal: var(--charcoal);
+  --color-charcoal-hero: var(--hero-charcoal);
+  --color-charcoal-deep: var(--hero-charcoal-deep);
+  --color-cream: #fdfbf7;
+  --color-beige: #f7f3ef;
+  --color-tobacco: #7d5d3f;
+  --color-tobacco-hover: #634931;
+  --color-gold: #9a7b5f;
+  --color-gold-light: #c1a37e;
+  --color-logo-taupe: #b8a898;
+  --color-gold-hover: #8a6b4f;
+  --color-bronze: #8e735b;
+  --color-bronze-hover: #7a634e;
+  --color-btn-black: #1a1a1a;
+  --color-btn-black-hover: #000000;
+  --color-forest: #2d4a3e;
+  --color-forest-light: #3d5f50;
+  --color-nav-glass: var(--nav-glass);
+  --color-nav-glass-border: var(--nav-glass-border);
+  --color-nav-active: var(--nav-active);
+  --color-nav-active-scrolled: var(--nav-active-scrolled);
+  --color-overlay: var(--overlay);
+  --color-hero-text: var(--hero-text);
+  --color-border: var(--border);
+
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-montserrat);
+  --font-serif: var(--font-playfair);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display font-bold tracking-tight text-foreground;
+  }
+
+  ::selection {
+    @apply bg-accent/30 text-foreground;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-bronze px-6 py-3 text-sm font-semibold text-hero-text transition-colors duration-200 hover:bg-bronze-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze;
+  }
+
+  .btn-booking {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-6 py-3 text-sm font-semibold text-hero-text transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2;
+  }
+
+  .btn-booking-charcoal {
+    @apply bg-charcoal-deep hover:bg-charcoal focus-visible:outline-charcoal-deep;
+  }
+
+  .btn-booking-black {
+    @apply bg-btn-black hover:bg-btn-black-hover focus-visible:outline-btn-black;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-tobacco px-6 py-3 text-sm font-semibold text-hero-text transition-colors duration-200 hover:bg-tobacco-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tobacco;
+  }
+
+  .section-label {
+    @apply text-label font-display font-semibold uppercase tracking-widest text-accent-secondary;
+  }
+
+  .glass-panel {
+    @apply rounded-lg border border-border bg-overlay backdrop-blur-nav;
+  }
+
+  .section-dark {
+    @apply bg-charcoal text-hero-text;
+  }
+
+  /* Sticky nav — lighter mirror glass on scroll */
+  .nav-glass {
+    @apply border-b border-transparent bg-nav-glass shadow-nav backdrop-blur-xl backdrop-saturate-150;
+  }
+
+  .nav-transparent {
+    @apply border-b border-transparent bg-transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
