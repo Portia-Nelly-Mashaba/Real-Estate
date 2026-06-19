@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { HeroSearch } from "@/components/home/HeroSearch";
+import { HeroTagline } from "@/components/home/HeroTagline";
 
 export function Hero() {
   return (
@@ -25,6 +26,8 @@ export function Hero() {
         className="hero-dim-gradient pointer-events-none absolute inset-0 z-[2]"
         aria-hidden="true"
       />
+
+      <HeroTagline />
 
       <div className="page-container relative z-10 overflow-visible pb-16 pt-32 lg:pb-20 lg:pt-40">
         <p className="section-label text-gold-light">Premium Real Estate</p>

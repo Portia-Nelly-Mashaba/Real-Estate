@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/layout/Logo";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
-import { BOOKING_HREF, NAV_LINKS, SITE_TAGLINE } from "@/lib/constants";
+import { BOOKING_HREF, NAV_LINKS } from "@/lib/constants";
 
 export function Header() {
   const pathname = usePathname();
@@ -32,15 +32,6 @@ export function Header() {
 
   return (
     <>
-      <span
-        className={`fixed left-3 top-1/2 z-50 hidden -translate-y-1/2 -rotate-90 text-[10px] font-medium uppercase tracking-[0.25em] transition-colors duration-300 lg:block ${
-          overHero ? "text-hero-text/50" : "text-muted"
-        }`}
-        aria-hidden="true"
-      >
-        {SITE_TAGLINE}
-      </span>
-
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
           scrolled ? "nav-glass" : "nav-transparent"
