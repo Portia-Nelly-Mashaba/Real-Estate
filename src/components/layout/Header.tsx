@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BookingHistoryButton } from "@/components/layout/BookingHistoryButton";
+import { FavoritesButton } from "@/components/layout/FavoritesButton";
 import { Logo } from "@/components/layout/Logo";
 import { BOOKING_HREF, NAV_LINKS } from "@/lib/constants";
 
@@ -68,15 +69,7 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-2 sm:gap-3">
-            <button
-              type="button"
-              className={`hidden rounded-full p-2 transition-colors duration-300 hover:bg-nav-active/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-light sm:block ${iconColor}`}
-              aria-label="Saved properties"
-            >
-              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-              </svg>
-            </button>
+            <FavoritesButton className={iconColor} />
 
             <div className={iconColor}>
               <BookingHistoryButton />

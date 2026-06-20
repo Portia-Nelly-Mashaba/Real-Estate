@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { CalendarClock, X } from "lucide-react";
+import { useHasMounted } from "@/hooks/useHasMounted";
 import { useBookings } from "@/hooks/useBookings";
 import { formatDisplayDate } from "@/lib/booking/availability";
 import { BOOKING_HREF } from "@/lib/constants";
@@ -12,6 +13,7 @@ interface BookingHistoryButtonProps {
 }
 
 export function BookingHistoryButton({ className = "" }: BookingHistoryButtonProps) {
+  const mounted = useHasMounted();
   const { bookings } = useBookings();
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -38,13 +40,13 @@ export function BookingHistoryButton({ className = "" }: BookingHistoryButtonPro
         aria-expanded={open}
         aria-haspopup="dialog"
         aria-label={
-          bookings.length > 0
+          mounted && bookings.length > 0
             ? `Viewing history, ${bookings.length} bookings`
             : "Viewing history"
         }
       >
         <CalendarClock className="h-5 w-5" strokeWidth={1.5} aria-hidden="true" />
-        {bookings.length > 0 ? (
+        {mounted && bookings.length > 0 ? (
           <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-gold-light" />
         ) : null}
       </button>
@@ -53,7 +55,7 @@ export function BookingHistoryButton({ className = "" }: BookingHistoryButtonPro
         <div
           role="dialog"
           aria-label="Viewing appointment history"
-          className="absolute right-0 top-[calc(100%+0.5rem)] z-50 w-[min(100vw-2rem,22rem)] overflow-hidden rounded-xl border border-border/40 bg-white shadow-elevated"
+          className="booking-history-panel fixed right-4 top-[4.25rem] z-[60] w-[min(22rem,calc(100vw-2rem))] overflow-hidden rounded-xl border border-border/40 bg-white shadow-elevated lg:absolute lg:right-0 lg:top-[calc(100%+0.5rem)] lg:w-[min(22rem,calc(100vw-2rem))]"
         >
           <div className="flex items-center justify-between border-b border-border/25 px-4 py-3">
             <p className="font-display text-sm font-semibold text-foreground">
@@ -70,7 +72,7 @@ export function BookingHistoryButton({ className = "" }: BookingHistoryButtonPro
           </div>
 
           <div className="max-h-80 overflow-y-auto p-2">
-            {bookings.length === 0 ? (
+            {!mounted || bookings.length === 0 ? (
               <div className="px-3 py-6 text-center">
                 <p className="text-sm text-muted">No viewings booked yet.</p>
                 <Link
@@ -86,10 +88,10 @@ export function BookingHistoryButton({ className = "" }: BookingHistoryButtonPro
                 {bookings.map((booking) => (
                   <li key={booking.id}>
                     <div className="rounded-lg px-3 py-2.5 transition-colors hover:bg-brown-light">
-                      <p className="text-sm font-medium text-foreground">
+                      <p className="text-sm font-medium leading-snug text-foreground">
                         {booking.propertyTitle}
                       </p>
-                      <p className="mt-0.5 text-xs text-muted">
+                      <p className="mt-0.5 text-xs leading-relaxed text-muted">
                         {formatDisplayDate(booking.date)} · {booking.time}
                       </p>
                       <p className="mt-1 text-xs text-muted">{booking.name}</p>

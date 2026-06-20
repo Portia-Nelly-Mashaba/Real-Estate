@@ -1,31 +1,37 @@
 "use client";
 
 import { Heart } from "lucide-react";
-import { useState } from "react";
+import { useHasMounted } from "@/hooks/useHasMounted";
+import { useFavorites } from "@/hooks/useFavorites";
 
 interface PropertyFavoriteButtonProps {
+  propertyId: string;
   propertyTitle: string;
 }
 
 export function PropertyFavoriteButton({
+  propertyId,
   propertyTitle,
 }: PropertyFavoriteButtonProps) {
-  const [saved, setSaved] = useState(false);
+  const mounted = useHasMounted();
+  const { isFavorite, toggleFavorite } = useFavorites();
+  const saved = mounted && isFavorite(propertyId);
 
   return (
     <button
       type="button"
       className="property-favorite-btn"
-      aria-pressed={saved}
+      aria-pressed={mounted ? saved : undefined}
       aria-label={
-        saved
-          ? `Remove ${propertyTitle} from saved properties`
-          : `Save ${propertyTitle} to favorites`
+        mounted && saved
+          ? `Remove ${propertyTitle} from favourites`
+          : `Save ${propertyTitle} to favourites`
       }
+      suppressHydrationWarning
       onClick={(event) => {
         event.preventDefault();
         event.stopPropagation();
-        setSaved((current) => !current);
+        toggleFavorite(propertyId);
       }}
     >
       <Heart

@@ -3,6 +3,7 @@ import {
   BOOKINGS_UPDATED_EVENT,
 } from "@/lib/booking/config";
 import {
+  filterActiveBookings,
   isSlotBooked,
   isUserSlotBooked,
   normalizeBookingEmail,
@@ -20,7 +21,7 @@ function isViewingBooking(value: unknown): value is ViewingBooking {
   );
 }
 
-export function getBookings(): ViewingBooking[] {
+function readBookingsFromStorage(): ViewingBooking[] {
   if (typeof window === "undefined") return [];
 
   try {
@@ -32,6 +33,27 @@ export function getBookings(): ViewingBooking[] {
   } catch {
     return [];
   }
+}
+
+function persistBookings(bookings: ViewingBooking[]): void {
+  window.localStorage.setItem(BOOKINGS_STORAGE_KEY, JSON.stringify(bookings));
+}
+
+export function purgeExpiredBookings(): ViewingBooking[] {
+  const stored = readBookingsFromStorage();
+  const active = filterActiveBookings(stored);
+
+  if (active.length !== stored.length) {
+    persistBookings(active);
+    window.dispatchEvent(new Event(BOOKINGS_UPDATED_EVENT));
+  }
+
+  return active;
+}
+
+export function getBookings(): ViewingBooking[] {
+  if (typeof window === "undefined") return [];
+  return purgeExpiredBookings();
 }
 
 export function saveBooking(
@@ -53,10 +75,7 @@ export function saveBooking(
     createdAt: new Date().toISOString(),
   };
 
-  window.localStorage.setItem(
-    BOOKINGS_STORAGE_KEY,
-    JSON.stringify([entry, ...existing]),
-  );
+  persistBookings([entry, ...existing]);
   window.dispatchEvent(new Event(BOOKINGS_UPDATED_EVENT));
   return entry;
 }

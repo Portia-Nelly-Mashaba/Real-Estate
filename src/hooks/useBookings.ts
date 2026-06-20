@@ -19,9 +19,12 @@ export function useBookings() {
       refresh();
     }
 
+    const interval = window.setInterval(refresh, 60_000);
+
     window.addEventListener(BOOKINGS_UPDATED_EVENT, handleUpdate);
     window.addEventListener("storage", handleUpdate);
     return () => {
+      window.clearInterval(interval);
       window.removeEventListener(BOOKINGS_UPDATED_EVENT, handleUpdate);
       window.removeEventListener("storage", handleUpdate);
     };

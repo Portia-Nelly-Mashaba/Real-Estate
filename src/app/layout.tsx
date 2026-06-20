@@ -37,8 +37,11 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${montserrat.variable} ${playfair.variable} h-full`}
+      suppressHydrationWarning
     >
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col" suppressHydrationWarning>
+        {children}
+      </body>
     </html>
   );
 }

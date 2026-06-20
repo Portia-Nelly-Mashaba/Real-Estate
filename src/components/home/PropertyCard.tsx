@@ -28,7 +28,10 @@ export function PropertyCard({ property }: PropertyCardProps) {
           />
         </Link>
         <span className="property-type-badge">{property.type}</span>
-        <PropertyFavoriteButton propertyTitle={property.title} />
+        <PropertyFavoriteButton
+          propertyId={property.id}
+          propertyTitle={property.title}
+        />
       </div>
 
       <div className="flex min-h-0 flex-col px-4 py-3.5">

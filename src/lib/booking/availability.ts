@@ -178,3 +178,21 @@ export function isSameDate(a: Date | null, b: Date | null): boolean {
   if (!a || !b) return false;
   return toDateKey(a) === toDateKey(b);
 }
+
+export function getBookingDateTime(dateKey: string, time: string): Date {
+  const [hours, minutes] = time.split(":").map(Number);
+  const date = parseDateKey(dateKey);
+  date.setHours(hours, minutes, 0, 0);
+  return date;
+}
+
+export function isBookingPast(
+  booking: Pick<ViewingBooking, "date" | "time">,
+  now: Date = new Date(),
+): boolean {
+  return getBookingDateTime(booking.date, booking.time).getTime() <= now.getTime();
+}
+
+export function filterActiveBookings(bookings: ViewingBooking[]): ViewingBooking[] {
+  return bookings.filter((booking) => !isBookingPast(booking));
+}

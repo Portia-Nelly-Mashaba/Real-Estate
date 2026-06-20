@@ -97,6 +97,7 @@ export function ContactForm() {
             onChange={updateField("name")}
             placeholder="Your name"
             className="contact-field"
+            suppressHydrationWarning
           />
         </div>
 
@@ -114,6 +115,7 @@ export function ContactForm() {
             onChange={updateField("email")}
             placeholder="you@email.com"
             className="contact-field"
+            suppressHydrationWarning
           />
         </div>
 
@@ -129,6 +131,7 @@ export function ContactForm() {
             onChange={updateField("phone")}
             placeholder="+27 xx xxx xxxx"
             className="contact-field"
+            suppressHydrationWarning
           />
         </div>
 
@@ -144,6 +147,7 @@ export function ContactForm() {
             onChange={updateField("subject")}
             placeholder="What is this about?"
             className="contact-field"
+            suppressHydrationWarning
           />
         </div>
       </div>
@@ -162,6 +166,7 @@ export function ContactForm() {
           onChange={updateField("message")}
           placeholder="Tell us how we can help..."
           className="contact-field min-h-[10rem] resize-y"
+          suppressHydrationWarning
         />
       </div>
 

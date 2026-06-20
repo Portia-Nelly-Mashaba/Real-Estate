@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { HeroDropdown } from "@/components/home/HeroDropdown";
+import { useHasMounted } from "@/hooks/useHasMounted";
 
 const PROPERTY_TYPE_OPTIONS = [
   { value: "house", label: "House" },
@@ -78,7 +79,27 @@ function PriceIcon() {
   );
 }
 
+function SearchIcon() {
+  return (
+    <svg
+      className="h-4 w-4"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      aria-hidden="true"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+      />
+    </svg>
+  );
+}
+
 export function HeroSearch() {
+  const mounted = useHasMounted();
   const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
   const [location, setLocation] = useState("");
@@ -113,56 +134,68 @@ export function HeroSearch() {
     router.push(query ? `/gallery?${query}` : "/gallery");
   }
 
+  if (!mounted) {
+    return (
+      <div
+        className="mt-6 h-[8.75rem] max-w-2xl animate-pulse rounded-xl bg-white/10 sm:mt-8 sm:h-14"
+        aria-hidden="true"
+      />
+    );
+  }
+
   return (
     <div
       ref={containerRef}
-      className={`mt-8 w-full overflow-visible transition-all duration-300 ease-in-out ${
+      className={`mt-6 w-full overflow-visible transition-all duration-300 ease-in-out sm:mt-8 ${
         filtersOpen ? "max-w-4xl" : "max-w-2xl"
       }`}
     >
       <form
         onSubmit={handleSubmit}
-        className="hero-search-bar w-full"
+        className="hero-search-bar"
         role="search"
         aria-label="Search properties"
       >
-        <svg
-          className="h-5 w-5 shrink-0 text-hero-text/80"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={1.5}
-            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+        <div className="hero-search-row">
+          <svg
+            className="h-5 w-5 shrink-0 text-hero-text/80"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={1.5}
+              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+            />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={1.5}
+              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+            />
+          </svg>
+
+          <span className="hero-search-divider" aria-hidden="true" />
+
+          <label htmlFor="hero-location" className="sr-only">
+            Location
+          </label>
+          <input
+            id="hero-location"
+            type="text"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            placeholder="Camps Bay, Sandton, Umhlanga..."
+            suppressHydrationWarning
+            className="min-w-0 flex-1 bg-transparent text-sm text-foreground placeholder:text-foreground/45 focus:outline-none sm:text-[0.9375rem]"
           />
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={1.5}
-            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-          />
-        </svg>
+        </div>
 
-        <span className="hero-search-divider" aria-hidden="true" />
-
-        <label htmlFor="hero-location" className="sr-only">
-          Location
-        </label>
-        <input
-          id="hero-location"
-          type="text"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          placeholder="Camps Bay, Sandton, Umhlanga..."
-          className="min-w-0 flex-1 bg-transparent text-sm text-foreground placeholder:text-foreground/45 focus:outline-none sm:text-[0.9375rem]"
-        />
-
-        {filtersOpen && (
-          <>
+        {filtersOpen ? (
+          <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:gap-0">
             <span className="hero-search-divider" aria-hidden="true" />
 
             <HeroDropdown
@@ -173,79 +206,47 @@ export function HeroSearch() {
               onChange={setPropertyType}
               icon={<HouseIcon />}
             />
-          </>
-        )}
 
-        <div
-          className={`flex shrink-0 items-center ${
-            filtersOpen ? "ml-auto" : "ml-1 gap-1.5"
-          }`}
-        >
-          {filtersOpen ? (
-            <>
-              <span className="hero-search-divider" aria-hidden="true" />
+            <span className="hero-search-divider" aria-hidden="true" />
 
-              <HeroDropdown
-                id="hero-price"
-                label="Price Range"
-                value={priceRange}
-                options={PRICE_RANGE_OPTIONS}
-                onChange={setPriceRange}
-                icon={<PriceIcon />}
-              />
-            </>
-          ) : (
-            <>
-              <button
-                type="button"
-                className="btn-filter"
-                onClick={() => setFiltersOpen(true)}
-                aria-expanded={filtersOpen}
-                aria-label="Filter properties"
-              >
-                <FilterIcon />
-              </button>
+            <HeroDropdown
+              id="hero-price"
+              label="Price Range"
+              value={priceRange}
+              options={PRICE_RANGE_OPTIONS}
+              onChange={setPriceRange}
+              icon={<PriceIcon />}
+            />
+          </div>
+        ) : null}
 
-              <button type="submit" className="btn-search">
-                <svg
-                  className="h-4 w-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
-                Search
-              </button>
-            </>
-          )}
-        </div>
-
-        {filtersOpen && (
-          <button type="submit" className="btn-search ml-20 shrink-0">
-            <svg
-              className="h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
+        <div className="hero-search-actions">
+          {!filtersOpen ? (
+            <button
+              type="button"
+              className="btn-filter"
+              onClick={() => setFiltersOpen(true)}
+              aria-expanded={filtersOpen}
+              aria-label="Filter properties"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
+              <FilterIcon />
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="btn-filter sm:hidden"
+              onClick={() => setFiltersOpen(false)}
+              aria-label="Close filters"
+            >
+              <FilterIcon />
+            </button>
+          )}
+
+          <button type="submit" className="btn-search">
+            <SearchIcon />
             Search
           </button>
-        )}
+        </div>
       </form>
     </div>
   );

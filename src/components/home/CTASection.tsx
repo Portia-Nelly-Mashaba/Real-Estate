@@ -26,7 +26,7 @@ export function CtaSection() {
           Durban, and the Winelands. Your pace, your questions.
         </p>
 
-        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+        <div className="mt-8 flex w-full max-w-md flex-col gap-3 sm:mx-auto sm:max-w-none sm:flex-row sm:justify-center sm:gap-4">
           <Link href="/gallery" className="btn-hero-browse">
             Browse Collection
             <span aria-hidden="true">&rarr;</span>

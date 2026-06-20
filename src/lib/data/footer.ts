@@ -1,10 +1,11 @@
-import { BOOKING_HREF } from "@/lib/constants";
+import { BOOKING_HREF, FAVORITES_HREF } from "@/lib/constants";
 
 export const FOOTER_DESCRIPTION =
   "South Africa's premier luxury real estate agency. Curating exceptional properties for discerning buyers since 2024.";
 
 export const FOOTER_EXPLORE_LINKS = [
   { href: "/gallery", label: "Properties" },
+  { href: FAVORITES_HREF, label: "Favourites" },
   { href: "/services", label: "Gallery" },
   { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact" },

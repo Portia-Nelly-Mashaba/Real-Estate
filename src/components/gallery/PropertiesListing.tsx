@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { PropertyCard } from "@/components/home/PropertyCard";
 import { PropertyListCard } from "@/components/gallery/PropertyListCard";
 import { PropertyToolbar } from "@/components/gallery/PropertyToolbar";
-import { ALL_PROPERTIES } from "@/lib/data/properties";
+import { ALL_PROPERTIES, type PropertyListing } from "@/lib/data/properties";
 import {
   DEFAULT_FILTERS,
   filterAndSortProperties,
@@ -14,9 +14,22 @@ import {
   type ViewMode,
 } from "@/lib/gallery/filters";
 
-export function PropertiesListing() {
+interface PropertiesListingProps {
+  properties?: PropertyListing[];
+  countLabel?: (resultsCount: number, sourceCount: number) => string;
+  emptyTitle?: string;
+  emptyMessage?: string;
+}
+
+export function PropertiesListing({
+  properties = ALL_PROPERTIES,
+  countLabel,
+  emptyTitle = "No properties found",
+  emptyMessage = "Try adjusting your search or reset the filters.",
+}: PropertiesListingProps) {
   const searchParams = useSearchParams();
   const locationSlug = searchParams.get("location");
+  const propertySlug = searchParams.get("property");
 
   const [filters, setFilters] = useState<PropertyFilters>(DEFAULT_FILTERS);
   const [sort, setSort] = useState<SortOption>("newest");
@@ -24,19 +37,28 @@ export function PropertiesListing() {
   const [filtersOpen, setFiltersOpen] = useState(false);
 
   const results = useMemo(
-    () => filterAndSortProperties(ALL_PROPERTIES, filters, sort, locationSlug),
-    [filters, sort, locationSlug],
+    () =>
+      filterAndSortProperties(
+        properties,
+        filters,
+        sort,
+        locationSlug,
+        propertySlug,
+      ),
+    [properties, filters, sort, locationSlug, propertySlug],
   );
 
   function resetFilters() {
     setFilters(DEFAULT_FILTERS);
   }
 
+  const resultsText =
+    countLabel?.(results.length, properties.length) ??
+    `${results.length} of ${properties.length} homes match your criteria.`;
+
   return (
     <>
-      <p className="text-sm text-muted">
-        {results.length} of {ALL_PROPERTIES.length} homes match your criteria.
-      </p>
+      <p className="text-sm text-muted">{resultsText}</p>
 
       <div className="mt-5">
         <PropertyToolbar
@@ -55,10 +77,8 @@ export function PropertiesListing() {
       <div className="gallery-results-area">
         {results.length === 0 ? (
           <div className="mt-8 rounded-2xl border border-border/40 bg-white px-6 py-14 text-center shadow-card">
-            <p className="font-serif text-2xl text-foreground">No properties found</p>
-            <p className="mt-3 text-sm text-muted">
-              Try adjusting your search or reset the filters.
-            </p>
+            <p className="font-serif text-2xl text-foreground">{emptyTitle}</p>
+            <p className="mt-3 text-sm text-muted">{emptyMessage}</p>
           </div>
         ) : view === "grid" ? (
           <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">

@@ -13,7 +13,7 @@ export default function HomePage() {
       <Header />
       <main className="snap-y snap-mandatory">
         <Hero />
-        <section className="snap-start bg-charcoal py-10 sm:py-12">
+        <section className="snap-start bg-charcoal py-5 sm:py-6">
           <div className="page-container">
             <HeroStats />
           </div>

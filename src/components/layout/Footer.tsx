@@ -25,7 +25,7 @@ export function Footer() {
   return (
     <footer className="relative bg-[#1a1a1a] text-[#d1d1d1]">
       <div
-        className="pointer-events-none absolute inset-x-0 top-[42%] z-0 -translate-y-1/2"
+        className="pointer-events-none absolute inset-x-0 top-[42%] z-0 hidden -translate-y-1/2 md:block"
         aria-hidden="true"
       >
         <div className="page-container flex justify-center">
@@ -36,8 +36,8 @@ export function Footer() {
       </div>
 
       <div className="page-container relative z-[1] py-16 sm:py-20 lg:py-24">
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
-          <div>
+        <div className="grid grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-4 lg:gap-10">
+          <div className="col-span-2 lg:col-span-1">
             <Link
               href="/"
               className="inline-block font-serif text-[1.35rem] font-medium leading-none tracking-tight focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-light"
@@ -77,7 +77,7 @@ export function Footer() {
             </ul>
           </nav>
 
-          <div>
+          <div className="col-span-2 lg:col-span-1">
             <h2 className={footerHeadingClass}>Contact</h2>
             <ul className="mt-5 space-y-4">
               <li className="flex gap-3">
@@ -123,7 +123,7 @@ export function Footer() {
 
       <div className="border-t border-white/[0.08]">
         <div className="page-container flex flex-col gap-3 py-5 text-xs text-[#888888] sm:flex-row sm:items-center sm:justify-between">
-          <p>
+          <p suppressHydrationWarning>
             &copy; {year} {SITE_NAME}. All rights reserved.
           </p>
           <nav

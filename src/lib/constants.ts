@@ -12,3 +12,4 @@ export const NAV_LINKS = [
 ] as const;
 
 export const BOOKING_HREF = "/booking";
+export const FAVORITES_HREF = "/favorites";

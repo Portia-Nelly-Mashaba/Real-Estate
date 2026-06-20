@@ -26,10 +26,15 @@ export function filterAndSortProperties(
   filters: PropertyFilters,
   sort: SortOption,
   locationSlug?: string | null,
+  propertySlug?: string | null,
 ): PropertyListing[] {
   const query = filters.search.trim().toLowerCase();
 
   let results = properties.filter((property) => {
+    if (propertySlug && property.id !== propertySlug) {
+      return false;
+    }
+
     if (locationSlug) {
       const regionMatch = property.regionSlug === locationSlug;
       if (!regionMatch) return false;

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Bath, BedDouble, MapPin, Maximize2 } from "lucide-react";
 import Link from "next/link";
+import { PropertyFavoriteButton } from "@/components/home/PropertyFavoriteButton";
 import {
   formatPropertyPrice,
   type PropertyListing,
@@ -15,15 +16,21 @@ const specIconClass = "h-4 w-4 shrink-0 stroke-[1.5] text-muted";
 export function PropertyListCard({ property }: PropertyListCardProps) {
   return (
     <article className="gallery-list-card">
-      <Link href={property.href} className="gallery-list-card-image group">
-        <Image
-          src={property.image}
-          alt={property.imageAlt}
-          fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-          sizes="(max-width: 1024px) 100vw, 320px"
+      <div className="gallery-list-card-image relative">
+        <Link href={property.href} className="group block h-full">
+          <Image
+            src={property.image}
+            alt={property.imageAlt}
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            sizes="(max-width: 1024px) 100vw, 320px"
+          />
+        </Link>
+        <PropertyFavoriteButton
+          propertyId={property.id}
+          propertyTitle={property.title}
         />
-      </Link>
+      </div>
 
       <div className="flex min-w-0 flex-1 flex-col p-5 sm:p-6">
         <p className="text-[0.6875rem] font-display font-semibold uppercase tracking-[0.14em] text-muted">

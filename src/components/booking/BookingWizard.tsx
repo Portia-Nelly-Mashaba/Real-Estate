@@ -200,6 +200,7 @@ export function BookingWizard() {
             value={propertyId}
             onChange={(event) => setPropertyId(event.target.value)}
             className="booking-select"
+            suppressHydrationWarning
           >
             <option value="">Select a property…</option>
             {ALL_PROPERTIES.map((property) => (
@@ -244,6 +245,7 @@ export function BookingWizard() {
                   value={form.name}
                   onChange={(event) => updateField("name", event.target.value)}
                   className="contact-field"
+                  suppressHydrationWarning
                   autoComplete="name"
                 />
               </div>
@@ -258,6 +260,7 @@ export function BookingWizard() {
                   value={form.email}
                   onChange={(event) => updateField("email", event.target.value)}
                   className="contact-field"
+                  suppressHydrationWarning
                   autoComplete="email"
                 />
               </div>
@@ -274,6 +277,7 @@ export function BookingWizard() {
                 value={form.phone}
                 onChange={(event) => updateField("phone", event.target.value)}
                 className="contact-field"
+                suppressHydrationWarning
                 autoComplete="tel"
               />
             </div>
@@ -288,6 +292,7 @@ export function BookingWizard() {
                 value={form.notes}
                 onChange={(event) => updateField("notes", event.target.value)}
                 className="contact-field resize-none"
+                suppressHydrationWarning
               />
             </div>
 

@@ -112,7 +112,7 @@ export function HeroDropdown({
   }
 
   return (
-    <div ref={rootRef} className="hero-dropdown relative shrink-0">
+    <div ref={rootRef} className="hero-dropdown relative w-full shrink-0 sm:w-auto">
       <button
         id={id}
         type="button"
