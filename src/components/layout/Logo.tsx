@@ -2,10 +2,10 @@ import Link from "next/link";
 import { SITE_LOGO_ACCENT, SITE_LOGO_PRIMARY, SITE_NAME } from "@/lib/constants";
 
 interface LogoProps {
-  scrolled: boolean;
+  overHero: boolean;
 }
 
-export function Logo({ scrolled }: LogoProps) {
+export function Logo({ overHero }: LogoProps) {
   return (
     <Link
       href="/"
@@ -15,7 +15,7 @@ export function Logo({ scrolled }: LogoProps) {
       <span className="font-serif text-[1.35rem] font-medium leading-none tracking-tight sm:text-[1.5rem]">
         <span
           className={`transition-colors duration-300 ${
-            scrolled ? "text-foreground" : "text-hero-text"
+            overHero ? "text-hero-text" : "text-foreground"
           }`}
         >
           {SITE_LOGO_PRIMARY}

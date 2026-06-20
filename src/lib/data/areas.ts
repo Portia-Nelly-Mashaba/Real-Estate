@@ -16,8 +16,7 @@ export const FEATURED_AREAS: Area[] = [
     title: "Cape Town, Western Cape",
     region: "Western Cape",
     propertyCount: 128,
-    image:
-      "https://images.unsplash.com/photo-1580060839134-14ada585e4e0?w=800&q=80",
+    image: "/images/areas/cape-town.jpg",
     imageAlt: "Aerial view of Cape Town with Table Mountain",
     href: "/gallery?location=cape-town",
   },
@@ -27,8 +26,7 @@ export const FEATURED_AREAS: Area[] = [
     title: "Sandton, Gauteng",
     region: "Johannesburg, Gauteng",
     propertyCount: 74,
-    image:
-      "https://images.unsplash.com/photo-1577948000114-ef513015e814?w=800&q=80",
+    image: "/images/areas/sandton.jpg",
     imageAlt: "Sandton skyline at dusk",
     href: "/gallery?location=sandton",
   },
@@ -38,8 +36,7 @@ export const FEATURED_AREAS: Area[] = [
     title: "Umhlanga, KwaZulu-Natal",
     region: "Durban, KwaZulu-Natal",
     propertyCount: 56,
-    image:
-      "https://images.unsplash.com/photo-1540206395-68808572332f?w=800&q=80",
+    image: "/images/areas/umhlanga.jpg",
     imageAlt: "Umhlanga coastline and lighthouse",
     href: "/gallery?location=umhlanga",
   },
@@ -49,8 +46,7 @@ export const FEATURED_AREAS: Area[] = [
     title: "Stellenbosch, Western Cape",
     region: "Western Cape",
     propertyCount: 42,
-    image:
-      "https://images.unsplash.com/photo-1590076215677-8758162d0468?w=800&q=80",
+    image: "/images/areas/stellenbosch.jpg",
     imageAlt: "Stellenbosch wine valley and mountains",
     href: "/gallery?location=stellenbosch",
   },

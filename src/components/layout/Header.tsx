@@ -33,12 +33,14 @@ export function Header() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-          scrolled ? "nav-glass" : "nav-transparent"
-        }`}
+        className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-300 ${
+          overHero
+            ? "border-transparent shadow-none"
+            : "border-border/25 shadow-nav"
+        } ${scrolled ? "nav-glass" : "nav-transparent"}`}
       >
         <div className="page-container flex items-center justify-between py-4">
-          <Logo scrolled={scrolled} />
+          <Logo overHero={overHero} />
 
           <nav
             className="hidden items-center gap-1 lg:flex"

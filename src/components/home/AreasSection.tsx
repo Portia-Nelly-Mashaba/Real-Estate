@@ -62,7 +62,7 @@ export function AreasSection() {
       <div className="page-container">
         <SectionHeader
           label="Explore South Africa"
-          title="Cities & popular areas"
+          title="Popular areas"
           href="/gallery"
           linkText="View all areas"
         />

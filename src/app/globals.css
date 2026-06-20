@@ -29,6 +29,14 @@
   --dropdown-text: #2d2926;
   --brown-light: #fbf8f4;
   --why-section-bg: #f3ece3;
+  --gallery-band: #f5f3ef;
+  --gallery-content: #faf9f6;
+  --gallery-control: #ebe7e0;
+  --gallery-btn-bg: #fdfcf8;
+  --gallery-btn-border: #e5e5e1;
+  --gallery-toggle-track: #757575;
+  --gallery-toggle-track-border: #a0a0a0;
+  --gallery-toggle-active: #2a3236;
 }
 
 /* ─── Dark mode ─── */
@@ -59,6 +67,11 @@
   --dropdown-text: #2d2926;
   --brown-light: #fbf8f4;
   --why-section-bg: #f3ece3;
+  --gallery-band: #f5f3ef;
+  --gallery-content: #faf9f6;
+  --gallery-control: #ebe7e0;
+  --gallery-btn-bg: #fdfcf8;
+  --gallery-btn-border: #e5e5e1;
 }
 
 @theme inline {
@@ -101,6 +114,14 @@
   --color-dropdown-text: var(--dropdown-text);
   --color-brown-light: var(--brown-light);
   --color-why-section-bg: var(--why-section-bg);
+  --color-gallery-band: var(--gallery-band);
+  --color-gallery-content: var(--gallery-content);
+  --color-gallery-control: var(--gallery-control);
+  --color-gallery-btn-bg: var(--gallery-btn-bg);
+  --color-gallery-btn-border: var(--gallery-btn-border);
+  --color-gallery-toggle-track: var(--gallery-toggle-track);
+  --color-gallery-toggle-track-border: var(--gallery-toggle-track-border);
+  --color-gallery-toggle-active: var(--gallery-toggle-active);
   --color-border: var(--border);
 
   --font-sans: var(--font-inter);
@@ -237,11 +258,11 @@
 
   /* Sticky nav — lighter mirror glass on scroll */
   .nav-glass {
-    @apply border-b border-transparent bg-nav-glass shadow-nav backdrop-blur-xl backdrop-saturate-150;
+    @apply bg-nav-glass shadow-nav backdrop-blur-xl backdrop-saturate-150;
   }
 
   .nav-transparent {
-    @apply border-b border-transparent bg-transparent;
+    @apply bg-transparent;
   }
 
   .contact-form-card {
@@ -258,6 +279,95 @@
 
   .contact-info-icon {
     @apply flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border/30 bg-white text-gold-light shadow-[0_2px_8px_rgba(26,26,26,0.06)];
+  }
+
+  .gallery-header-band {
+    @apply bg-gallery-band;
+  }
+
+  .gallery-results-area {
+    @apply relative left-1/2 mt-8 w-screen -translate-x-1/2 bg-gallery-content pb-16 sm:pb-20;
+  }
+
+  .gallery-results-area > ul,
+  .gallery-results-area > div {
+    @apply mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8;
+  }
+
+  .gallery-toolbar {
+    @apply rounded-xl border border-border/35 bg-white p-3 shadow-[0_3px_18px_rgba(26,26,26,0.06)] sm:p-3.5;
+  }
+
+  .gallery-search-input {
+    @apply h-10 w-full rounded-[0.625rem] border border-gallery-btn-border bg-gallery-btn-bg px-3.5 text-[0.8125rem] text-foreground shadow-[0_1px_4px_rgba(26,26,26,0.07)] placeholder:text-muted/45 transition-colors focus:border-accent/40 focus:outline-none focus:ring-2 focus:ring-accent/10;
+  }
+
+  .gallery-control-btn {
+    @apply inline-flex h-10 items-center rounded-lg border border-border/35 bg-white px-3 text-[0.8125rem] font-medium text-foreground transition-colors hover:border-border/50 hover:bg-gallery-content focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+  }
+
+  .gallery-toolbar-btn {
+    @apply inline-flex h-10 items-center rounded-[0.625rem] border border-gallery-btn-border bg-gallery-btn-bg px-3.5 text-[0.8125rem] font-normal text-foreground shadow-[0_1px_4px_rgba(26,26,26,0.07)] transition-colors hover:border-border/45 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+  }
+
+  .gallery-toolbar-btn-active {
+    @apply border-accent/30 bg-gallery-content;
+  }
+
+  .gallery-sort-menu {
+    @apply absolute right-0 top-[calc(100%+0.375rem)] z-50 min-w-[12.5rem] overflow-hidden rounded-xl border border-border/40 bg-white p-1 shadow-elevated;
+  }
+
+  .gallery-sort-option {
+    @apply flex w-full items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-left text-sm text-foreground transition-colors hover:bg-gallery-control;
+  }
+
+  .gallery-sort-option-active {
+    @apply bg-gallery-control;
+  }
+
+  .gallery-view-toggle {
+    @apply inline-flex h-10 shrink-0 items-center gap-0.5 rounded-lg border border-gallery-btn-border bg-gallery-btn-bg p-1 shadow-[0_1px_4px_rgba(26,26,26,0.07)];
+  }
+
+  .gallery-view-btn {
+    @apply inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-search-green transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+  }
+
+  .gallery-view-btn-active {
+    @apply inline-flex h-8 w-8 items-center justify-center rounded-lg bg-charcoal-deep text-hero-text transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-charcoal-deep;
+  }
+
+  .gallery-filters-panel {
+    @apply mt-4 border-t border-border/20 pt-4;
+  }
+
+  .gallery-filter-field {
+    @apply block;
+  }
+
+  .gallery-filter-label {
+    @apply mb-2 block text-[0.6875rem] font-display font-semibold uppercase tracking-[0.14em] text-muted;
+  }
+
+  .gallery-filter-select {
+    @apply w-full rounded-xl border border-border/50 bg-white px-3 py-2.5 text-sm text-foreground focus:border-accent/40 focus:outline-none focus:ring-2 focus:ring-accent/15;
+  }
+
+  .gallery-price-range {
+    @apply h-1.5 cursor-pointer appearance-none rounded-full bg-border/40 accent-search-green;
+  }
+
+  .gallery-reset-btn {
+    @apply mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-muted transition-colors hover:text-foreground;
+  }
+
+  .gallery-list-card {
+    @apply flex flex-col overflow-hidden rounded-2xl border border-border/50 bg-white shadow-card transition-shadow duration-200 hover:shadow-elevated sm:flex-row;
+  }
+
+  .gallery-list-card-image {
+    @apply relative aspect-[4/3] w-full shrink-0 overflow-hidden sm:aspect-auto sm:h-auto sm:min-h-[15rem] sm:w-[17.5rem] lg:w-[20rem];
   }
 }
 

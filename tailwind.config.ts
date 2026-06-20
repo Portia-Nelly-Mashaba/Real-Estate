@@ -63,6 +63,9 @@ const config: Config = {
         "dropdown-text": "var(--dropdown-text)",
         "brown-light": "var(--brown-light)",
         "why-section-bg": "var(--why-section-bg)",
+        "gallery-band": "var(--gallery-band)",
+        "gallery-content": "var(--gallery-content)",
+        "gallery-control": "var(--gallery-control)",
         border: "var(--border)",
       },
       fontFamily: {
