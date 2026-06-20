@@ -1,4 +1,5 @@
 import { FOOTER_CONTACT } from "@/lib/data/footer";
+import { OPERATING_HOURS_LINES } from "@/lib/data/hours";
 
 export const CONTACT_PAGE = {
   label: "Get in Touch",
@@ -28,6 +29,6 @@ export const CONTACT_DETAILS = [
   {
     id: "hours",
     title: "Business Hours",
-    lines: ["Mon - Fri: 09:00 - 17:00", "Sat: 09:00 - 13:00"],
+    lines: [...OPERATING_HOURS_LINES],
   },
 ] as const;

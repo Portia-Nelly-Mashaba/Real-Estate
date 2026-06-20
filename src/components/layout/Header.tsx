@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { BookingHistoryButton } from "@/components/layout/BookingHistoryButton";
 import { Logo } from "@/components/layout/Logo";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { BOOKING_HREF, NAV_LINKS } from "@/lib/constants";
 
 export function Header() {
@@ -79,7 +79,7 @@ export function Header() {
             </button>
 
             <div className={iconColor}>
-              <ThemeToggle />
+              <BookingHistoryButton />
             </div>
 
             <Link

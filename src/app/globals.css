@@ -245,11 +245,20 @@
   }
 
   .btn-hero-browse {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-gold-light px-6 py-3 text-sm font-semibold text-foreground transition-colors duration-200 hover:bg-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-light;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-[#c6a682] px-7 py-3.5 text-sm font-semibold text-[#1a1a1a] shadow-sm transition-colors duration-200 hover:bg-[#b8956f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#c6a682] disabled:cursor-not-allowed disabled:bg-[#c6a682] disabled:text-[#1a1a1a]/45 disabled:hover:bg-[#c6a682];
+  }
+
+  .btn-confirm-viewing {
+    @apply inline-flex w-full items-center justify-center rounded-lg bg-gold-light px-6 py-3 text-sm font-semibold transition-colors duration-200 hover:bg-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-light disabled:cursor-not-allowed disabled:bg-gold-light disabled:hover:bg-gold-light;
+    color: #ffffff;
+  }
+
+  .btn-confirm-viewing:disabled {
+    color: rgba(255, 255, 255, 0.5);
   }
 
   .btn-hero-glass {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-white/25 bg-hero-search px-6 py-3 text-sm font-semibold text-foreground backdrop-blur-xl transition-colors duration-200 hover:bg-white/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-white/50 bg-white/20 px-7 py-3.5 text-sm font-semibold text-[#1a1a1a] backdrop-blur-md transition-colors duration-200 hover:border-white/65 hover:bg-white/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50;
   }
 
   .section-dark {
@@ -368,6 +377,94 @@
 
   .gallery-list-card-image {
     @apply relative aspect-[4/3] w-full shrink-0 overflow-hidden sm:aspect-auto sm:h-auto sm:min-h-[15rem] sm:w-[17.5rem] lg:w-[20rem];
+  }
+
+  .photo-gallery-filter {
+    @apply inline-flex h-10 items-center rounded-lg border border-gallery-btn-border bg-gallery-btn-bg px-4 text-[0.8125rem] font-normal text-foreground shadow-[0_1px_4px_rgba(26,26,26,0.07)] transition-colors hover:border-border/45 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+  }
+
+  .photo-gallery-filter-active {
+    @apply border-charcoal-deep bg-charcoal-deep text-hero-text shadow-none hover:border-charcoal-deep;
+  }
+
+  .photo-gallery-card {
+    @apply block overflow-hidden rounded-xl border border-border/50 bg-white shadow-card transition-shadow duration-200 hover:shadow-elevated;
+  }
+
+  .booking-step-card {
+    @apply rounded-2xl border border-border/35 bg-white p-5 shadow-[0_4px_20px_rgba(26,26,26,0.06)] sm:p-6;
+  }
+
+  .booking-select {
+    @apply w-full rounded-xl border border-border/50 bg-white px-4 py-3 text-sm text-foreground shadow-[inset_0_1px_2px_rgba(26,26,26,0.04)] focus:border-bronze/50 focus:outline-none focus:ring-2 focus:ring-bronze/15;
+  }
+
+  .booking-calendar-nav {
+    @apply inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border/35 bg-white text-foreground transition-colors hover:border-border/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+  }
+
+  .booking-calendar-day {
+    @apply flex h-10 w-full items-center justify-center rounded-lg text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+  }
+
+  .booking-calendar-day-available {
+    @apply border border-border/30 bg-white text-foreground hover:border-accent/35 hover:bg-brown-light;
+  }
+
+  .booking-calendar-day-selected {
+    @apply border border-charcoal-deep bg-charcoal-deep text-hero-text;
+  }
+
+  .booking-calendar-day-unavailable {
+    @apply cursor-not-allowed border border-transparent bg-border/20 text-muted/50;
+  }
+
+  .booking-time-slot {
+    @apply inline-flex min-w-[4.5rem] items-center justify-center rounded-lg border px-4 py-2.5 text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+  }
+
+  .booking-time-slot-available {
+    @apply border-border/35 bg-white text-foreground hover:border-accent/35 hover:bg-brown-light;
+  }
+
+  .booking-time-slot-selected {
+    @apply border-charcoal-deep bg-charcoal-deep text-hero-text;
+  }
+
+  .booking-time-slot-unavailable {
+    @apply cursor-not-allowed border-transparent bg-border/20 text-muted/45 line-through;
+  }
+
+  .booking-summary-card {
+    @apply rounded-2xl border border-white/10 bg-charcoal-hero p-6 shadow-[0_8px_32px_rgba(26,26,26,0.12)] sm:p-7;
+  }
+
+  .booking-confirmation-card {
+    @apply mx-auto max-w-2xl rounded-2xl border border-border/35 bg-white px-6 py-10 text-center shadow-[0_8px_32px_rgba(26,26,26,0.08)] sm:px-10 sm:py-12;
+  }
+
+  .booking-confirmation-details {
+    @apply rounded-xl border border-border/30 bg-brown-light px-5 py-4 text-left;
+  }
+
+  .booking-confirmation-details div {
+    @apply grid grid-cols-[5.5rem_1fr] gap-3 border-b border-border/25 py-3 last:border-b-0;
+  }
+
+  .booking-confirmation-details dt {
+    @apply text-xs font-display font-semibold uppercase tracking-wide text-muted;
+  }
+
+  .booking-confirmation-details dd {
+    @apply text-sm font-medium text-foreground;
+  }
+
+  .notification-toast {
+    @apply fixed right-4 top-24 z-[100] flex max-w-sm items-start gap-3 rounded-xl border border-white/10 bg-charcoal-deep px-4 py-3 shadow-elevated sm:right-6 sm:top-28;
+  }
+
+  .notification-toast-dismiss {
+    @apply rounded-md p-1 text-hero-text/70 transition-colors hover:bg-white/10 hover:text-hero-text focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/40;
   }
 }
 

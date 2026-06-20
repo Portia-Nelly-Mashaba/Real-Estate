@@ -2,6 +2,7 @@
 
 import { Send } from "lucide-react";
 import { FormEvent, useState } from "react";
+import { useNotificationToast } from "@/components/ui/NotificationToast";
 
 interface FormState {
   name: string;
@@ -27,6 +28,7 @@ export function ContactForm() {
   const [form, setForm] = useState<FormState>(initialState);
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { showToast, toast } = useNotificationToast();
 
   const updateField =
     (field: keyof FormState) =>
@@ -48,6 +50,7 @@ export function ContactForm() {
       if (response.ok) {
         setSubmitted(true);
         setForm(initialState);
+        showToast("Your message was sent successfully.");
       }
     } finally {
       setIsSubmitting(false);
@@ -56,7 +59,9 @@ export function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="contact-form-card flex min-h-[28rem] flex-col items-start justify-center">
+      <>
+        {toast}
+        <div className="contact-form-card flex min-h-[28rem] flex-col items-start justify-center">
         <p className="font-serif text-display-lg text-foreground">Message sent.</p>
         <p className="mt-4 max-w-md text-lg leading-relaxed text-muted">
           Thank you for reaching out. Our team will respond within 24 hours.
@@ -69,10 +74,13 @@ export function ContactForm() {
           Send another message
         </button>
       </div>
+      </>
     );
   }
 
   return (
+    <>
+      {toast}
     <form onSubmit={handleSubmit} className="contact-form-card">
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
@@ -168,5 +176,6 @@ export function ContactForm() {
         </button>
       </div>
     </form>
+    </>
   );
 }
