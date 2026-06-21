@@ -3,16 +3,19 @@ import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 
-export const metadata: Metadata = {
-  title: "Terms of Service | Mashaba Property Investments",
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = createPageMetadata({
+  title: "Terms of Service",
   description: "Terms of service for Mashaba Property Investments.",
-};
+  path: "/terms",
+});
 
 export default function TermsPage() {
   return (
     <>
       <Header />
-      <main className="bg-brown-light">
+      <main id="main-content" className="bg-brown-light">
         <section className="page-container pb-16 pt-28 sm:pb-20 sm:pt-32">
           <p className="text-label font-display font-medium uppercase tracking-[0.15em] text-accent">
             Legal

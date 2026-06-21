@@ -156,6 +156,26 @@
 }
 
 @layer components {
+  .skip-link {
+    @apply fixed left-4 top-4 z-[100] rounded-md bg-charcoal-deep px-4 py-2.5 font-display text-sm font-semibold text-hero-text outline-none ring-2 ring-gold-light;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .skip-link:focus,
+  .skip-link:focus-visible {
+    clip: auto;
+    clip-path: none;
+    height: auto;
+    width: auto;
+    overflow: visible;
+    white-space: normal;
+  }
+
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 rounded-lg bg-bronze px-6 py-3 text-sm font-semibold text-hero-text transition-colors duration-200 hover:bg-bronze-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze;
   }
@@ -240,6 +260,10 @@
     @apply flex h-auto min-h-[11.25rem] w-full flex-col rounded-2xl border border-border/50 bg-white px-6 py-5 shadow-[0_4px_20px_rgba(26,26,26,0.06)] sm:h-[11.75rem] sm:min-h-0 sm:px-7 sm:py-6;
   }
 
+  .gallery-footer-shade {
+    @apply h-10 w-full bg-gallery-content sm:h-12;
+  }
+
   .testimonial-card {
     @apply flex h-full min-h-[17.5rem] w-full flex-col rounded-2xl border border-white/10 bg-charcoal-deep/80 px-6 py-7 sm:min-h-[18.5rem] sm:px-7 sm:py-8;
   }
@@ -259,6 +283,14 @@
 
   .testimonials-carousel-dot-active {
     @apply w-6 bg-gold-light;
+  }
+
+  .services-carousel-dot {
+    @apply h-2 w-2 rounded-full bg-foreground/15 transition-colors duration-200;
+  }
+
+  .services-carousel-dot-active {
+    @apply w-6 bg-accent;
   }
 
   .hero-stats-marquee {

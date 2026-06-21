@@ -4,17 +4,19 @@ import { BookingWizard } from "@/components/booking/BookingWizard";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { BOOKING_PAGE } from "@/lib/booking/config";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Book a Viewing | Mashaba Property Investments",
+export const metadata: Metadata = createPageMetadata({
+  title: "Book a Viewing",
   description: BOOKING_PAGE.description,
-};
+  path: "/booking",
+});
 
 export default function BookingPage() {
   return (
     <>
       <Header />
-      <main className="bg-brown-light">
+      <main id="main-content" className="bg-brown-light">
         <section className="page-container pb-16 pt-28 sm:pb-20 sm:pt-32">
           <p className="text-label font-display font-medium uppercase tracking-[0.15em] text-accent">
             {BOOKING_PAGE.label}

@@ -8,13 +8,14 @@ export const FOOTER_EXPLORE_LINKS = [
   { href: FAVORITES_HREF, label: "Favourites" },
   { href: "/services", label: "Gallery" },
   { href: "/about", label: "About Us" },
+  { href: "/about#services", label: "Services" },
   { href: "/contact", label: "Contact" },
 ] as const;
 
 export const FOOTER_SERVICE_LINKS = [
   { href: BOOKING_HREF, label: "Book a Viewing" },
   { href: "/contact", label: "Property Valuation" },
-  { href: "/services", label: "Investment Advisory" },
+  { href: "/about#services", label: "Investment Advisory" },
   { href: "/contact", label: "Relocation Services" },
 ] as const;
 

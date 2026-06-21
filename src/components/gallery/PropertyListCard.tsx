@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Bath, BedDouble, MapPin, Maximize2 } from "lucide-react";
 import Link from "next/link";
 import { PropertyFavoriteButton } from "@/components/home/PropertyFavoriteButton";
+import { BOOKING_HREF } from "@/lib/constants";
 import {
   formatPropertyPrice,
   type PropertyListing,
@@ -26,6 +27,7 @@ export function PropertyListCard({ property }: PropertyListCardProps) {
             sizes="(max-width: 1024px) 100vw, 320px"
           />
         </Link>
+        <span className="property-type-badge">{property.type}</span>
         <PropertyFavoriteButton
           propertyId={property.id}
           propertyTitle={property.title}
@@ -33,11 +35,7 @@ export function PropertyListCard({ property }: PropertyListCardProps) {
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col p-5 sm:p-6">
-        <p className="text-[0.6875rem] font-display font-semibold uppercase tracking-[0.14em] text-muted">
-          {property.type} · {property.status}
-        </p>
-
-        <Link href={property.href} className="group/title mt-2">
+        <Link href={property.href} className="group/title">
           <h2 className="font-serif text-xl font-medium leading-snug text-foreground transition-colors group-hover/title:text-accent sm:text-2xl">
             {property.title}
           </h2>
@@ -46,6 +44,10 @@ export function PropertyListCard({ property }: PropertyListCardProps) {
         <p className="mt-2 flex items-center gap-1.5 text-sm text-muted">
           <MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />
           {property.location}
+        </p>
+
+        <p className="mt-3 font-display text-lg font-bold text-gold-light sm:text-xl">
+          {formatPropertyPrice(property.price)}
         </p>
 
         <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-muted">
@@ -67,9 +69,13 @@ export function PropertyListCard({ property }: PropertyListCardProps) {
           </li>
         </ul>
 
-        <p className="mt-auto pt-5 font-serif text-2xl text-foreground sm:text-[1.75rem]">
-          {formatPropertyPrice(property.price)}
-        </p>
+        <Link
+          href={`${BOOKING_HREF}?property=${property.id}`}
+          className="mt-auto inline-flex items-center gap-1 self-start pt-5 font-display text-sm font-bold text-foreground transition-colors hover:text-accent"
+        >
+          Book a viewing
+          <span aria-hidden="true">&rarr;</span>
+        </Link>
       </div>
     </article>
   );

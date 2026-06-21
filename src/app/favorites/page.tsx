@@ -4,16 +4,19 @@ import { FavoritesListing } from "@/components/gallery/FavoritesListing";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 
-export const metadata: Metadata = {
-  title: "Your Favourites | Mashaba Property Investments",
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = createPageMetadata({
+  title: "Your Favourites",
   description: "Your saved luxury properties across South Africa.",
-};
+  path: "/favorites",
+});
 
 export default function FavoritesPage() {
   return (
     <>
       <Header />
-      <main className="bg-gallery-content">
+      <main id="main-content" className="bg-gallery-content">
         <div className="gallery-header-band">
           <section className="page-container pb-8 pt-28 sm:pb-10 sm:pt-32">
             <p className="text-label font-display font-medium uppercase tracking-[0.15em] text-accent">

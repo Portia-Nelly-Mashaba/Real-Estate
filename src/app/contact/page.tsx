@@ -4,17 +4,19 @@ import { ContactInfo } from "@/components/contact/ContactInfo";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { CONTACT_PAGE } from "@/lib/data/contact";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contact Us | Mashaba Property Investments",
+export const metadata: Metadata = createPageMetadata({
+  title: "Contact Us",
   description: CONTACT_PAGE.description,
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (
     <>
       <Header />
-      <main className="bg-brown-light">
+      <main id="main-content" className="bg-brown-light">
         <section className="page-container pb-16 pt-28 sm:pb-20 sm:pt-32">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-14 xl:gap-16">
             <div>

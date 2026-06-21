@@ -3,18 +3,20 @@ import { Suspense } from "react";
 import { PropertiesListing } from "@/components/gallery/PropertiesListing";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "All Properties | Mashaba Property Investments",
+export const metadata: Metadata = createPageMetadata({
+  title: "All Properties",
   description:
     "Browse luxury homes for sale across South Africa — Cape Town, Johannesburg, Durban, and the Winelands.",
-};
+  path: "/gallery",
+});
 
 export default function GalleryPage() {
   return (
     <>
       <Header />
-      <main className="bg-gallery-content">
+      <main id="main-content" className="bg-gallery-content">
         <div className="gallery-header-band">
           <section className="page-container pb-8 pt-28 sm:pb-10 sm:pt-32">
             <p className="text-label font-display font-medium uppercase tracking-[0.15em] text-accent">

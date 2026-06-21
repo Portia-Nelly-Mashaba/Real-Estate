@@ -20,7 +20,7 @@ export const VIEWING_TIME_SLOTS = [
 export type ViewingTimeSlot = (typeof VIEWING_TIME_SLOTS)[number];
 
 /** Demo WhatsApp number for assessment submission */
-export const WHATSAPP_DEMO_NUMBER = "27825550142";
+export const WHATSAPP_DEMO_NUMBER = "27781526699";
 
 export const BOOKINGS_STORAGE_KEY = "mashaba-viewing-bookings";
 export const BOOKINGS_UPDATED_EVENT = "mashaba-bookings-updated";

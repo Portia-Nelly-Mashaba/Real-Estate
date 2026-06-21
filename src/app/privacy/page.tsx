@@ -3,16 +3,19 @@ import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy | Mashaba Property Investments",
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = createPageMetadata({
+  title: "Privacy Policy",
   description: "How Mashaba Property Investments handles your personal information.",
-};
+  path: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (
     <>
       <Header />
-      <main className="bg-brown-light">
+      <main id="main-content" className="bg-brown-light">
         <section className="page-container pb-16 pt-28 sm:pb-20 sm:pt-32">
           <p className="text-label font-display font-medium uppercase tracking-[0.15em] text-accent">
             Legal

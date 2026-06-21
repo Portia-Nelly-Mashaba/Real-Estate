@@ -28,6 +28,7 @@ export function ContactForm() {
   const [form, setForm] = useState<FormState>(initialState);
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
   const { showToast, toast } = useNotificationToast();
 
   const updateField =
@@ -39,6 +40,7 @@ export function ContactForm() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsSubmitting(true);
+    setFormError(null);
 
     try {
       const response = await fetch("/api/contact", {
@@ -47,11 +49,26 @@ export function ContactForm() {
         body: JSON.stringify(form),
       });
 
+      const data = (await response.json().catch(() => null)) as {
+        error?: string;
+        message?: string;
+      } | null;
+
       if (response.ok) {
         setSubmitted(true);
         setForm(initialState);
         showToast("Your message was sent successfully.");
+        return;
       }
+
+      setFormError(
+        data?.error ??
+          "Something went wrong. Please try again or call us directly.",
+      );
+      showToast("Unable to send your message. Please try again.");
+    } catch {
+      setFormError("Something went wrong. Please check your connection and try again.");
+      showToast("Unable to send your message. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -81,7 +98,7 @@ export function ContactForm() {
   return (
     <>
       {toast}
-    <form onSubmit={handleSubmit} className="contact-form-card">
+    <form onSubmit={handleSubmit} className="contact-form-card" noValidate>
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
           <label htmlFor="contact-name" className="contact-label">
@@ -97,6 +114,7 @@ export function ContactForm() {
             onChange={updateField("name")}
             placeholder="Your name"
             className="contact-field"
+            autoComplete="name"
             suppressHydrationWarning
           />
         </div>
@@ -115,6 +133,7 @@ export function ContactForm() {
             onChange={updateField("email")}
             placeholder="you@email.com"
             className="contact-field"
+            autoComplete="email"
             suppressHydrationWarning
           />
         </div>
@@ -131,7 +150,7 @@ export function ContactForm() {
             onChange={updateField("phone")}
             placeholder="+27 xx xxx xxxx"
             className="contact-field"
-            suppressHydrationWarning
+            autoComplete="tel"
           />
         </div>
 
@@ -169,6 +188,16 @@ export function ContactForm() {
           suppressHydrationWarning
         />
       </div>
+
+      {formError ? (
+        <div
+          className="mt-6 rounded-xl border border-bronze/30 bg-bronze/5 px-4 py-3 text-sm font-medium text-bronze"
+          role="alert"
+          aria-live="assertive"
+        >
+          {formError}
+        </div>
+      ) : null}
 
       <div className="mt-8 border-t border-border/25 pt-6">
         <button

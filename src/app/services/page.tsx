@@ -3,17 +3,19 @@ import { PhotoGalleryGrid } from "@/components/photo-gallery/PhotoGalleryGrid";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { PHOTO_GALLERY_PAGE } from "@/lib/data/photo-gallery";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Gallery | Mashaba Property Investments",
+export const metadata: Metadata = createPageMetadata({
+  title: "Gallery",
   description: PHOTO_GALLERY_PAGE.description,
-};
+  path: "/services",
+});
 
 export default function GalleryPage() {
   return (
     <>
       <Header />
-      <main className="bg-gallery-content">
+      <main id="main-content" className="bg-gallery-content">
         <div className="gallery-header-band">
           <section className="page-container pb-8 pt-28 sm:pb-10 sm:pt-32">
             <p className="text-label font-display font-medium uppercase tracking-[0.15em] text-accent">
