@@ -4,10 +4,7 @@ import Link from "next/link";
 import { Check } from "lucide-react";
 import { useEffect, useState } from "react";
 import { formatDisplayDate } from "@/lib/booking/availability";
-import {
-  sendBookingNotification,
-  showBrowserNotification,
-} from "@/lib/booking/notifications";
+import { sendBookingNotification } from "@/lib/booking/notifications";
 import { buildWhatsAppUrl } from "@/lib/booking/whatsapp";
 import type { ViewingBooking } from "@/lib/booking/types";
 interface BookingConfirmationProps {
@@ -27,7 +24,6 @@ export function BookingConfirmation({ booking, onReset }: BookingConfirmationPro
       if (cancelled || !result.ok) return;
 
       setNotificationSent(true);
-      await showBrowserNotification(booking);
     }
 
     void notifyTeam();

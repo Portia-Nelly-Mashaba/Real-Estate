@@ -1,4 +1,3 @@
-import { formatDisplayDate } from "@/lib/booking/availability";
 import type { ViewingBooking } from "@/lib/booking/types";
 
 export interface BookingNotificationResult {
@@ -45,20 +44,4 @@ export async function sendBookingNotification(
       message: "Could not send notification.",
     };
   }
-}
-
-export async function showBrowserNotification(
-  booking: ViewingBooking,
-): Promise<void> {
-  if (typeof window === "undefined" || !("Notification" in window)) return;
-
-  if (Notification.permission === "default") {
-    await Notification.requestPermission();
-  }
-
-  if (Notification.permission !== "granted") return;
-
-  new Notification("Viewing booked", {
-    body: `${booking.propertyTitle} — ${formatDisplayDate(booking.date)} at ${booking.time}`,
-  });
 }
