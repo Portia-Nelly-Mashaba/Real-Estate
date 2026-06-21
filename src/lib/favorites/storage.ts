@@ -30,7 +30,7 @@ export function isFavoriteId(propertyId: string, ids = getFavoriteIds()): boolea
   return ids.includes(propertyId);
 }
 
-/** Returns the new saved state after toggling. */
+// true if saved, false if removed
 export function toggleFavoriteId(propertyId: string): boolean {
   const existing = readFavoriteIds();
   const isSaved = existing.includes(propertyId);

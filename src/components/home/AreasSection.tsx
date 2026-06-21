@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PropertyCard } from "@/components/home/PropertyCard";
-import { FEATURED_AREAS } from "@/lib/data/areas";
+import { FEATURED_AREAS, getListingCountForArea } from "@/lib/data/areas";
 import { FEATURED_PROPERTIES } from "@/lib/data/properties";
 
 function ChevronRightIcon() {
@@ -68,7 +68,11 @@ export function AreasSection() {
         />
 
         <ul className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-5">
-          {FEATURED_AREAS.map((area) => (
+          {FEATURED_AREAS.map((area) => {
+            const count = getListingCountForArea(area.id);
+            const countLabel = count === 1 ? "1 listing" : `${count} listings`;
+
+            return (
             <li key={area.id}>
               <Link
                 href={area.href}
@@ -90,7 +94,7 @@ export function AreasSection() {
                       {area.title}
                     </h3>
                     <p className="mt-0.5 text-xs text-muted sm:text-sm">
-                      {area.propertyCount} active properties
+                      {countLabel}
                     </p>
                   </div>
 
@@ -103,15 +107,16 @@ export function AreasSection() {
                 </div>
               </Link>
             </li>
-          ))}
+            );
+          })}
         </ul>
 
         <div className="mt-20 lg:mt-24">
           <SectionHeader
-            label="Featured Collection"
-            title="Currently represented"
+            label="On our books"
+            title="Current listings"
             href="/gallery"
-            linkText="View entire collection"
+            linkText="View all properties"
           />
 
           <p className="mt-4 text-sm text-muted">

@@ -6,10 +6,10 @@ export const ABOUT_PAGE = {
   description:
     "Mashaba Property Investments opened in Sandton in 2024. We work across Cape Town, Johannesburg, Durban, and the Winelands.",
   story:
-    "Our office is on White Road in De Infern. We take on fewer homes than the big portals and give each buyer and seller proper time — viewings by appointment, one team from offer to registration.",
+    "Our office is on White Road in Deinfern. We take on fewer homes than the big portals and give each buyer and seller proper time — viewings by appointment, one team from offer to registration.",
   image: "/images/about/de-infern-sandton.jpg",
-  imageAlt: "Sandton skyline near De Infern, Johannesburg",
-  imageCaption: "De Infern, Sandton",
+  imageAlt: "Sandton skyline near Deinfern, Johannesburg",
+  imageCaption: "Deinfern, Sandton",
 } as const;
 
 export const ABOUT_FACTS = [

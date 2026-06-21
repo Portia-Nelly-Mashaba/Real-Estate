@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @config "../../tailwind.config.ts";
 
-/* ─── Light mode ─── */
+/* light */
 :root {
   --background: #fdfbf7;
   --foreground: #1a1a1a;
@@ -39,7 +39,7 @@
   --gallery-toggle-active: #2a3236;
 }
 
-/* ─── Dark mode ─── */
+/* dark */
 .dark {
   --background: #0f0f0f;
   --foreground: #ffffff;
@@ -360,7 +360,7 @@
     @apply bg-charcoal text-hero-text;
   }
 
-  /* Sticky nav — lighter mirror glass on scroll */
+  /* nav glass when scrolled */
   .nav-glass {
     @apply bg-nav-glass shadow-nav backdrop-blur-xl backdrop-saturate-150;
   }

@@ -5,7 +5,7 @@ export const CONTACT_PAGE = {
   label: "Get in Touch",
   lead: "A single conversation.",
   description:
-    "Whether you'd like to view a home, list one privately, or simply understand the market — we'd be glad to talk.",
+    "Want to view a home, list privately, or ask about a suburb? Call, email, or use the form.",
 } as const;
 
 export const CONTACT_DETAILS = [

@@ -1,7 +1,7 @@
 import { BOOKING_HREF, FAVORITES_HREF } from "@/lib/constants";
 
 export const FOOTER_DESCRIPTION =
-  "South Africa's premier luxury real estate agency. Curating exceptional properties for discerning buyers since 2024.";
+  "A small Sandton agency working across Cape Town, Johannesburg, Durban, and the Winelands. Viewings by appointment.";
 
 export const FOOTER_EXPLORE_LINKS = [
   { href: "/gallery", label: "Properties" },
@@ -15,8 +15,8 @@ export const FOOTER_EXPLORE_LINKS = [
 export const FOOTER_SERVICE_LINKS = [
   { href: BOOKING_HREF, label: "Book a Viewing" },
   { href: "/contact", label: "Property Valuation" },
-  { href: "/about#services", label: "Investment Advisory" },
-  { href: "/contact", label: "Relocation Services" },
+  { href: "/gallery", label: "Buyer Representation" },
+  { href: "/contact", label: "Off-Market Enquiries" },
 ] as const;
 
 export const FOOTER_CONTACT = {

@@ -6,7 +6,6 @@ import { HeroTagline } from "@/components/home/HeroTagline";
 export function Hero() {
   return (
     <section className="relative flex min-h-dvh snap-start snap-always flex-col justify-end overflow-hidden bg-charcoal-hero sm:justify-center">
-      {/* Background image */}
       <div className="absolute inset-0 z-0">
         <Image
           src="/images/hero.jpg"
@@ -18,10 +17,8 @@ export function Hero() {
         />
       </div>
 
-      {/* Dim overlay */}
       <div className="hero-dim pointer-events-none absolute inset-0 z-[1]" aria-hidden="true" />
 
-      {/* Gradient depth on top of dim */}
       <div
         className="hero-dim-gradient pointer-events-none absolute inset-0 z-[2]"
         aria-hidden="true"
@@ -47,11 +44,11 @@ export function Hero() {
 
         <div className="mt-8 flex w-full max-w-md flex-col gap-3 sm:mt-10 sm:max-w-none sm:flex-row sm:gap-4">
           <Link href="/gallery" className="btn-hero-browse">
-            Browse Collection
+            View properties
             <span aria-hidden="true">&rarr;</span>
           </Link>
           <Link href="/booking" className="btn-hero-glass">
-            Book a Private Viewing
+            Book a viewing
           </Link>
         </div>
       </div>

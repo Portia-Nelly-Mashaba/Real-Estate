@@ -17,7 +17,7 @@ export const PHOTO_GALLERY_PAGE = {
   label: "Visual Gallery",
   lead: "A closer look.",
   description:
-    "Interiors, architecture, and places from our current collection across South Africa.",
+    "Photos from our current listings and the areas we work in.",
 } as const;
 
 export const PHOTO_GALLERY_FILTERS: { value: PhotoGalleryCategory; label: string }[] =

@@ -10,9 +10,9 @@ import { Header } from "@/components/layout/Header";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Luxury Real Estate South Africa",
+  title: "Property South Africa",
   description:
-    "Discover exceptional homes across South Africa. Browse listings, book private viewings, and invest with Mashaba Property Investments.",
+    "Six homes across Cape Town, Johannesburg, Durban, and the Winelands. Book a viewing with Mashaba Property Investments.",
   path: "/",
 });
 

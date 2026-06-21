@@ -8,7 +8,8 @@ import { BookingSummary } from "@/components/booking/BookingSummary";
 import { BookingTimeSlots } from "@/components/booking/BookingTimeSlots";
 import { useNotificationToast } from "@/components/ui/NotificationToast";
 import { useBookings } from "@/hooks/useBookings";
-import { useHasMounted } from "@/hooks/useHasMounted";import {
+import { useHasMounted } from "@/hooks/useHasMounted";
+import {
   isSlotBooked,
   isUserSlotBooked,
   toDateKey,

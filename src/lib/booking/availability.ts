@@ -56,7 +56,7 @@ export function normalizeBookingEmail(email: string): string {
   return email.trim().toLowerCase();
 }
 
-/** Same visitor cannot hold two viewings at the same date and time. */
+// one booking per email per slot
 export function isUserSlotBooked(
   bookings: ViewingBooking[],
   dateKey: string,

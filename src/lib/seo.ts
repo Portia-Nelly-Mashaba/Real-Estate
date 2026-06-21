@@ -9,13 +9,12 @@ export function getSiteUrl(): string {
 }
 
 export const DEFAULT_DESCRIPTION =
-  "Luxury property sales, private viewings, and investment advisory across Cape Town, Johannesburg, Durban, and the Winelands.";
+  "Property sales and private viewings across Cape Town, Johannesburg, Durban, and the Winelands. Based in Sandton, est. 2024.";
 
 export const SITE_KEYWORDS = [
-  "luxury real estate South Africa",
-  "property investments",
-  "Sandton property",
-  "Cape Town homes",
+  "property South Africa",
+  "Sandton estate agent",
+  "Cape Town homes for sale",
   "book property viewing",
   "Mashaba Property Investments",
 ];
@@ -57,7 +56,7 @@ export function createPageMetadata({
 export const rootMetadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: {
-    default: `${SITE_NAME} | Luxury Real Estate South Africa`,
+    default: `${SITE_NAME} | Property South Africa`,
     template: `%s | ${SITE_NAME}`,
   },
   description: DEFAULT_DESCRIPTION,
@@ -79,7 +78,7 @@ export const rootMetadata: Metadata = {
     type: "website",
     locale: "en_ZA",
     siteName: SITE_NAME,
-    title: `${SITE_NAME} | Luxury Real Estate South Africa`,
+    title: `${SITE_NAME} | Property South Africa`,
     description: DEFAULT_DESCRIPTION,
   },
   twitter: {

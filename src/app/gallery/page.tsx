@@ -8,7 +8,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "All Properties",
   description:
-    "Browse luxury homes for sale across South Africa — Cape Town, Johannesburg, Durban, and the Winelands.",
+    "Six homes for sale across Cape Town, Johannesburg, Durban, and the Winelands.",
   path: "/gallery",
 });
 

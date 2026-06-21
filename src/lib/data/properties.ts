@@ -46,9 +46,9 @@ export const ALL_PROPERTIES: PropertyListing[] = [
     beds: 4,
     baths: 4,
     areaSqm: 410,
-    description: "An architect's escape in the heart of Hyde Park.",
+    description: "Four-bed townhouse with pool and garden on a quiet Hyde Park street.",
     longDescription:
-      "Set behind manicured gardens on a quiet Hyde Park street, this four-bedroom townhouse pairs contemporary architecture with warm finishes, a private pool, and seamless indoor-outdoor living — minutes from Sandton's best schools and dining.",
+      "410 m² on a cul-de-sac off Jan Smuts Avenue. Open-plan living opens to a pool terrace, with a separate staff suite and double garage. Hyde Park Corner and Sandton are a short drive away.",
     image: "/images/properties/hyde-park.jpg",
     imageAlt: "Elegant townhouse garden and facade in Hyde Park",
     galleryImages: [
@@ -80,10 +80,9 @@ export const ALL_PROPERTIES: PropertyListing[] = [
     beds: 4,
     baths: 4,
     areaSqm: 380,
-    description:
-      "Floor-to-ceiling glass, Atlantic views, and private rooftop entertaining.",
+    description: "Penthouse with Atlantic views and a private rooftop terrace.",
     longDescription:
-      "This Camps Bay penthouse captures uninterrupted ocean sunsets from every main room. A private rooftop terrace, designer kitchen, and concierge building complete a lock-up-and-go lifestyle on the Atlantic Seaboard.",
+      "380 m² on the upper floors of a secure Victoria Road building. Three parking bays, concierge, and a rooftop that catches the sunset. Camps Bay beach and restaurants are within walking distance.",
     image: "/images/properties/camps-bay-penthouse.jpg",
     imageAlt: "Luxury penthouse with ocean views in Camps Bay",
     galleryImages: [
@@ -115,10 +114,9 @@ export const ALL_PROPERTIES: PropertyListing[] = [
     beds: 3,
     baths: 2,
     areaSqm: 165,
-    description:
-      "Contemporary coastal living with lagoon views and resort amenities.",
+    description: "Three-bed apartment near Umhlanga Ridge with lagoon outlook.",
     longDescription:
-      "Umhlanga Ridge offers resort-style living with 24-hour security, a gym, and direct access to the Gateway precinct. This light-filled apartment is ideal for coastal professionals or a holiday lock-up.",
+      "165 m² in a secure complex with gym and 24-hour access control. Two covered parking bays, open-plan living, and a short drive to Gateway and the beachfront promenade.",
     image: "/images/properties/umhlanga.jpg",
     imageAlt: "Modern apartment interior with coastal views",
     galleryImages: [
@@ -150,10 +148,9 @@ export const ALL_PROPERTIES: PropertyListing[] = [
     beds: 6,
     baths: 7,
     areaSqm: 920,
-    description:
-      "An extraordinary clifftop residence with panoramic Atlantic views and infinity pool.",
+    description: "Six-bed clifftop home with pool and wine cellar in Camps Bay.",
     longDescription:
-      "Commanding one of Camps Bay's most coveted positions, this six-bedroom freestanding home delivers cinema, wine cellar, staff quarters, and an infinity pool that merges with the horizon. A rare trophy property for the discerning buyer.",
+      "920 m² on one of Camps Bay's steeper plots. Double-volume living faces the Atlantic, with staff quarters, cinema room, and an infinity pool. Three garages and full perimeter security.",
     image: "/images/properties/clifftop-villa.jpg",
     imageAlt: "Luxury freestanding home with pool overlooking the ocean",
     galleryImages: [
@@ -185,10 +182,9 @@ export const ALL_PROPERTIES: PropertyListing[] = [
     beds: 5,
     baths: 4,
     areaSqm: 540,
-    description:
-      "Cape Dutch elegance among vineyards with mountain views and guest cottage.",
+    description: "Cape Dutch home among vineyards with guest cottage and mountain views.",
     longDescription:
-      "Framed by vineyards and the Stellenbosch mountains, this Cape Dutch home includes a separate guest cottage, borehole irrigation, and generous entertainment terraces — perfect for wine-country living year-round.",
+      "540 m² main house plus a separate guest cottage on a borehole-fed erf. Entertaining terraces look over the vines towards the Stellenbosch mountains. Stellenbosch town is a ten-minute drive.",
     image: "/images/properties/stellenbosch.jpg",
     imageAlt: "Wine estate home in Stellenbosch valley",
     galleryImages: [
@@ -220,10 +216,9 @@ export const ALL_PROPERTIES: PropertyListing[] = [
     beds: 3,
     baths: 2,
     areaSqm: 185,
-    description:
-      "Premium apartment in the heart of Sandton with concierge and skyline views.",
+    description: "Three-bed apartment in Sandton with concierge and skyline views.",
     longDescription:
-      "Sandton Heights places you at the centre of Africa's financial capital. Floor-to-ceiling windows frame the skyline, while the building offers concierge, gym, and secure underground parking.",
+      "185 m² in a central Sandton tower. Concierge, gym, and two basement parking bays. Living areas face north over the skyline, with easy access to Sandton City and the Gautrain.",
     image: "/images/properties/sandton.jpg",
     imageAlt: "Modern high-rise apartment interior with city views",
     galleryImages: [
@@ -245,7 +240,7 @@ export const ALL_PROPERTIES: PropertyListing[] = [
   },
 ];
 
-/** Homepage featured strip — first three listings */
+// first 3 listings on home
 export const FEATURED_PROPERTIES = ALL_PROPERTIES.slice(0, 3);
 
 export type FeaturedProperty = PropertyListing;

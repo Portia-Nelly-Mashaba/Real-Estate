@@ -1,4 +1,4 @@
-/** Office and viewing hours — single source of truth */
+// office + viewing hours, change here if needed
 export const OPERATING_HOURS = {
   timezone: "SAST",
   weekday: { label: "Mon - Fri", open: "09:00", close: "17:00" },

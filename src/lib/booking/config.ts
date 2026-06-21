@@ -1,6 +1,6 @@
 import { VIEWING_HOURS_DESCRIPTION } from "@/lib/data/hours";
 
-/** Last slot is 16:00 (1-hour viewings within 09:00–17:00; 12:00–14:00 lunch gap). */
+// last slot 16:00; lunch break 12:00-14:00
 export const BOOKING_PAGE = {
   label: "Book a Viewing",
   lead: "Reserve a private viewing.",
@@ -19,7 +19,7 @@ export const VIEWING_TIME_SLOTS = [
 
 export type ViewingTimeSlot = (typeof VIEWING_TIME_SLOTS)[number];
 
-/** Demo WhatsApp number for assessment submission */
+// demo number for the assessment brief
 export const WHATSAPP_DEMO_NUMBER = "27781526699";
 
 export const BOOKINGS_STORAGE_KEY = "mashaba-viewing-bookings";

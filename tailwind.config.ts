@@ -1,8 +1,5 @@
 import type { Config } from "tailwindcss";
 
-/**
- * Mashaba Property Investments — design tokens
- */
 const config: Config = {
   darkMode: "class",
   theme: {

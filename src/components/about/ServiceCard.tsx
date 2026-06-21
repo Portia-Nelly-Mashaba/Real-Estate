@@ -2,11 +2,9 @@
 
 import Link from "next/link";
 import {
-  Building2,
   ChartLine,
   Home,
   KeyRound,
-  MapPinned,
   Search,
   type LucideIcon,
 } from "lucide-react";
@@ -15,8 +13,6 @@ import type { ServiceIconId, ServiceOffering } from "@/lib/data/services";
 const SERVICE_ICONS: Record<ServiceIconId, LucideIcon> = {
   "key-round": KeyRound,
   "chart-line": ChartLine,
-  building: Building2,
-  "map-pinned": MapPinned,
   search: Search,
   home: Home,
 };

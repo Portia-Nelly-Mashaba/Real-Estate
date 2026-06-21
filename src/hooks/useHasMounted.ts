@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-/** Avoid SSR/client mismatches for browser-only UI (dates, localStorage, extensions). */
+// only render browser stuff after mount (localStorage, dates, etc.)
 export function useHasMounted(): boolean {
   const [mounted, setMounted] = useState(false);
 

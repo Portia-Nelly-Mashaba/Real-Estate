@@ -28,11 +28,11 @@ export function CtaSection() {
 
         <div className="mt-8 flex w-full max-w-md flex-col gap-3 sm:mx-auto sm:max-w-none sm:flex-row sm:justify-center sm:gap-4">
           <Link href="/gallery" className="btn-hero-browse">
-            Browse Collection
+            View properties
             <span aria-hidden="true">&rarr;</span>
           </Link>
           <Link href={BOOKING_HREF} className="btn-hero-glass">
-            Book a Private Viewing
+            Book a viewing
           </Link>
         </div>
       </div>

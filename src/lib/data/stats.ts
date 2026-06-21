@@ -1,6 +1,6 @@
 export const HERO_STATS = [
-  { value: "850+", label: "Properties Sold" },
-  { value: "R 12B", label: "Total Value Transacted" },
-  { value: "98%", label: "Client Satisfaction" },
-  { value: "15+", label: "Years of Excellence" },
+  { value: "2024", label: "Established" },
+  { value: "6", label: "Homes listed" },
+  { value: "4", label: "Regions covered" },
+  { value: "1", label: "Sandton office" },
 ] as const;
