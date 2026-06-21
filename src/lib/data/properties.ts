@@ -2,7 +2,7 @@ export type PropertyType =
   | "House"
   | "Apartment"
   | "Townhouse"
-  | "Villa"
+  | "Freestanding"
   | "Penthouse";
 
 export type PropertyStatus = "For Sale";
@@ -96,7 +96,7 @@ export const ALL_PROPERTIES: PropertyListing[] = [
         alt: "Gourmet kitchen opening onto the Camps Bay penthouse terrace",
       },
       {
-        src: "https://images.unsplash.com/photo-1616137467421-4836960d1a58?w=800&q=80",
+        src: "/images/properties/interiors/camps-bay-bedroom.jpg",
         alt: "Master suite with ocean-facing balcony in Camps Bay",
       },
     ],
@@ -123,7 +123,7 @@ export const ALL_PROPERTIES: PropertyListing[] = [
     imageAlt: "Modern apartment interior with coastal views",
     galleryImages: [
       {
-        src: "https://images.unsplash.com/photo-1600607687920-4e2a09ae1592?w=800&q=80",
+        src: "/images/properties/interiors/umhlanga-living.jpg",
         alt: "Bright coastal apartment living room with lagoon outlook",
       },
       {
@@ -140,11 +140,11 @@ export const ALL_PROPERTIES: PropertyListing[] = [
   },
   {
     id: "atlantic-clifftop",
-    title: "The Atlantic Clifftop Villa",
+    title: "The Atlantic Clifftop Home",
     location: "Camps Bay, Cape Town",
     region: "Western Cape",
     regionSlug: "cape-town",
-    type: "Villa",
+    type: "Freestanding",
     status: "For Sale",
     price: 78_500_000,
     beds: 6,
@@ -153,17 +153,17 @@ export const ALL_PROPERTIES: PropertyListing[] = [
     description:
       "An extraordinary clifftop residence with panoramic Atlantic views and infinity pool.",
     longDescription:
-      "Commanding one of Camps Bay's most coveted positions, this six-bedroom villa delivers cinema, wine cellar, staff quarters, and an infinity pool that merges with the horizon. A rare trophy home for the discerning buyer.",
+      "Commanding one of Camps Bay's most coveted positions, this six-bedroom freestanding home delivers cinema, wine cellar, staff quarters, and an infinity pool that merges with the horizon. A rare trophy property for the discerning buyer.",
     image: "/images/properties/clifftop-villa.jpg",
-    imageAlt: "Luxury villa with pool overlooking the ocean",
+    imageAlt: "Luxury freestanding home with pool overlooking the ocean",
     galleryImages: [
       {
         src: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80",
-        alt: "Double-volume villa living space with clifftop views",
+        alt: "Double-volume living space with clifftop views",
       },
       {
-        src: "https://images.unsplash.com/photo-1613545325278-f07b0f0aef76?w=800&q=80",
-        alt: "Wine cellar and tasting room in Atlantic Clifftop Villa",
+        src: "/images/properties/interiors/clifftop-wine.jpg",
+        alt: "Wine cellar and tasting room in Atlantic Clifftop Home",
       },
       {
         src: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=800&q=80",
@@ -193,11 +193,11 @@ export const ALL_PROPERTIES: PropertyListing[] = [
     imageAlt: "Wine estate home in Stellenbosch valley",
     galleryImages: [
       {
-        src: "https://images.unsplash.com/photo-1600573472592-401b698a0d3a?w=800&q=80",
+        src: "/images/properties/interiors/stellenbosch-living.jpg",
         alt: "Cape Dutch living room with vineyard views in Stellenbosch",
       },
       {
-        src: "https://images.unsplash.com/photo-1600489000022-c208692d7aed?w=800&q=80",
+        src: "/images/properties/interiors/stellenbosch-kitchen.jpg",
         alt: "Farmhouse kitchen with exposed beams and stone finishes",
       },
       {
@@ -293,7 +293,7 @@ export const PROPERTY_TYPE_OPTIONS = [
   { value: "House", label: "House" },
   { value: "Apartment", label: "Apartment" },
   { value: "Townhouse", label: "Townhouse" },
-  { value: "Villa", label: "Villa" },
+  { value: "Freestanding", label: "Freestanding" },
   { value: "Penthouse", label: "Penthouse" },
 ] as const;
 

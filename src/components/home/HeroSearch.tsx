@@ -9,7 +9,7 @@ const PROPERTY_TYPE_OPTIONS = [
   { value: "house", label: "House" },
   { value: "apartment", label: "Apartment" },
   { value: "penthouse", label: "Penthouse" },
-  { value: "villa", label: "Villa" },
+  { value: "freestanding", label: "Freestanding" },
   { value: "townhouse", label: "Townhouse" },
   { value: "estate", label: "Estate" },
 ];

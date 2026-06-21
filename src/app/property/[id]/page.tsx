@@ -54,7 +54,9 @@ function getPropertyJsonLd(property: NonNullable<ReturnType<typeof getPropertyBy
     description: property.longDescription,
     image: [
       `${getSiteUrl()}${property.image}`,
-      ...property.galleryImages.map((photo) => photo.src),
+      ...property.galleryImages.map((photo) =>
+        photo.src.startsWith("http") ? photo.src : `${getSiteUrl()}${photo.src}`,
+      ),
     ],
     address: {
       "@type": "PostalAddress",
