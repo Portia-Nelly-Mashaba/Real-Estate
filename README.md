@@ -201,8 +201,6 @@ The site is optimised for Lighthouse review:
 - Skip-to-content link for keyboard users
 - Security and best-practice headers
 
-Run Lighthouse against the live URL in Chrome DevTools (Incognito, mobile or desktop) to verify scores.
-
 **Target scores (assessment):**
 
 | Category | Target |
@@ -211,6 +209,28 @@ Run Lighthouse against the live URL in Chrome DevTools (Incognito, mobile or des
 | Accessibility | 80+ |
 | Best Practices | 90+ |
 | SEO | 90+ |
+
+### Lighthouse results (mobile)
+
+Audited on the live Vercel deployment using Chrome DevTools Lighthouse (mobile).
+
+| Page | Performance | Accessibility | Best Practices | SEO |
+|------|-------------|---------------|----------------|-----|
+| [Home](https://real-estate-teal-delta.vercel.app/) | 89 | 93 | 100 | 100 |
+| [Booking](https://real-estate-teal-delta.vercel.app/booking) | 80 | 96 | 100 | 100 |
+| [Property detail](https://real-estate-teal-delta.vercel.app/property/hyde-park-townhouse) | 90 | 96 | 100 | 100 |
+
+#### Home
+
+![Lighthouse — Home page](./public/screenshots/lighthouse-home.png)
+
+#### Booking
+
+![Lighthouse — Booking page](./public/screenshots/lighthouse-booking.png)
+
+#### Property detail
+
+![Lighthouse — Property detail page](./public/screenshots/lighthouse-property.png)
 
 ---
 
