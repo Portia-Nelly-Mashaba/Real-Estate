@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { PropertyInteriorGalleryMobile } from "@/components/property/PropertyInteriorGalleryMobile";
 import type { PropertyImage } from "@/lib/data/properties";
 
 interface PropertyInteriorGalleryProps {
@@ -25,7 +26,13 @@ export function PropertyInteriorGallery({
       >
         Interior gallery
       </h2>
-      <ul className="mt-5 grid gap-3 sm:grid-cols-3 sm:gap-4">
+
+      <PropertyInteriorGalleryMobile
+        images={images}
+        propertyTitle={propertyTitle}
+      />
+
+      <ul className="mt-5 hidden gap-4 sm:grid sm:grid-cols-3">
         {images.map((photo, index) => (
           <li
             key={photo.src}
@@ -36,7 +43,7 @@ export function PropertyInteriorGallery({
               alt={photo.alt}
               fill
               className="object-cover transition-transform duration-300 hover:scale-105"
-              sizes="(max-width: 640px) 100vw, 33vw"
+              sizes="33vw"
             />
             <span className="sr-only">
               {propertyTitle} interior photo {index + 1} of {images.length}

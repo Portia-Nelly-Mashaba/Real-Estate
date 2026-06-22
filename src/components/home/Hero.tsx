@@ -1,20 +1,13 @@
-import Image from "next/image";
 import Link from "next/link";
 import { HeroSearch } from "@/components/home/HeroSearch";
+import { HeroSlideshow } from "@/components/home/HeroSlideshow";
 import { HeroTagline } from "@/components/home/HeroTagline";
 
 export function Hero() {
   return (
     <section className="relative flex min-h-dvh snap-start snap-always flex-col justify-end overflow-hidden bg-charcoal-hero sm:justify-center">
       <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/hero.jpg"
-          alt="Modern white luxury home with green lawn and open blue sky"
-          fill
-          priority
-          className="object-cover object-center"
-          sizes="100vw"
-        />
+        <HeroSlideshow />
       </div>
 
       <div className="hero-dim pointer-events-none absolute inset-0 z-[1]" aria-hidden="true" />
