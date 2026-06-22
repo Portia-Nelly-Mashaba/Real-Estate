@@ -217,7 +217,11 @@
   }
 
   .hero-search-bar {
-    @apply flex w-full flex-col gap-3 rounded-xl border border-white/25 bg-hero-search p-3 backdrop-blur-xl sm:h-14 sm:flex-row sm:items-center sm:gap-0 sm:overflow-visible sm:py-1.5 sm:pl-5 sm:pr-1.5;
+    @apply relative flex w-full flex-col gap-3 overflow-visible rounded-xl border border-white/25 bg-hero-search p-3 backdrop-blur-xl sm:h-14 sm:flex-row sm:items-center sm:gap-0 sm:py-1.5 sm:pl-5 sm:pr-1.5;
+  }
+
+  .hero-search-fields {
+    @apply flex w-full min-w-0 flex-1 flex-col gap-3 overflow-visible sm:flex-row sm:items-center sm:gap-0;
   }
 
   .hero-search-row {
@@ -225,19 +229,23 @@
   }
 
   .hero-search-actions {
-    @apply flex w-full shrink-0 items-center gap-2 sm:w-auto sm:gap-1.5;
+    @apply flex w-full shrink-0 items-center gap-2 sm:ml-3 sm:w-auto sm:gap-1.5;
   }
 
   .hero-search-divider {
     @apply hidden h-5 w-px shrink-0 bg-foreground/20 sm:mx-3 sm:block;
   }
 
+  .hero-dropdown {
+    @apply relative w-full shrink-0 sm:w-auto sm:min-w-[8.5rem];
+  }
+
   .hero-dropdown-trigger {
-    @apply flex w-full min-w-0 items-center gap-2 bg-transparent py-1 text-left focus:outline-none sm:w-auto;
+    @apply flex w-full min-w-0 items-center gap-2 whitespace-nowrap bg-transparent py-1 text-left focus:outline-none sm:w-auto;
   }
 
   .hero-dropdown-menu {
-    @apply absolute bottom-[calc(100%+0.25rem)] left-0 z-50 w-full min-w-[11.5rem] rounded-2xl border border-white bg-dropdown-cream p-1 shadow-elevated;
+    @apply absolute bottom-[calc(100%+0.25rem)] left-0 z-[100] w-auto min-w-[11.5rem] rounded-2xl border border-white bg-dropdown-cream p-1 shadow-elevated;
   }
 
   .hero-dropdown-option {
@@ -246,6 +254,14 @@
 
   .hero-dropdown-option-active {
     @apply bg-dropdown-active font-medium text-hero-text;
+  }
+
+  .hero-dropdown-option-first.hero-dropdown-option-active {
+    @apply rounded-t-xl;
+  }
+
+  .hero-dropdown-option-last.hero-dropdown-option-active {
+    @apply rounded-b-xl;
   }
 
   .property-type-badge {

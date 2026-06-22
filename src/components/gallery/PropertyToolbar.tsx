@@ -10,7 +10,9 @@ import {
 } from "@/lib/data/properties";
 import {
   DEFAULT_FILTERS,
-  MAX_PROPERTY_PRICE,
+  PRICE_FILTER_CEILING,
+  PRICE_FILTER_FLOOR,
+  PRICE_FILTER_STEP,
   type PropertyFilters,
   type SortOption,
   type ViewMode,
@@ -215,12 +217,12 @@ export function PropertyToolbar({
             </label>
 
             <div className="gallery-filter-field">
-              <span className="gallery-filter-label">Price range</span>
+              <span className="gallery-filter-label">Max price</span>
               <input
                 type="range"
-                min={0}
-                max={MAX_PROPERTY_PRICE}
-                step={500_000}
+                min={PRICE_FILTER_FLOOR}
+                max={PRICE_FILTER_CEILING}
+                step={PRICE_FILTER_STEP}
                 value={filters.maxPrice}
                 onChange={(event) =>
                   onFiltersChange({
@@ -229,14 +231,17 @@ export function PropertyToolbar({
                   })
                 }
                 className="gallery-price-range mt-3 w-full"
-                aria-valuemin={0}
-                aria-valuemax={MAX_PROPERTY_PRICE}
+                aria-valuemin={PRICE_FILTER_FLOOR}
+                aria-valuemax={PRICE_FILTER_CEILING}
                 aria-valuenow={filters.maxPrice}
                 aria-label="Maximum price"
               />
               <div className="mt-2 flex justify-between text-xs text-muted">
-                <span>R 0</span>
-                <span>{formatPropertyPrice(MAX_PROPERTY_PRICE)}</span>
+                <span>{formatPropertyPrice(PRICE_FILTER_FLOOR)}</span>
+                <span className="font-medium text-foreground">
+                  Up to {formatPropertyPrice(filters.maxPrice)}
+                </span>
+                <span>{formatPropertyPrice(PRICE_FILTER_CEILING)}</span>
               </div>
             </div>
           </div>

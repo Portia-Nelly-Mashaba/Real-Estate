@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { PropertyCard } from "@/components/home/PropertyCard";
 import { PropertyListCard } from "@/components/gallery/PropertyListCard";
@@ -8,6 +8,7 @@ import { PropertyToolbar } from "@/components/gallery/PropertyToolbar";
 import { ALL_PROPERTIES, type PropertyListing } from "@/lib/data/properties";
 import {
   DEFAULT_FILTERS,
+  buildFiltersFromSearchParams,
   filterAndSortProperties,
   type PropertyFilters,
   type SortOption,
@@ -30,11 +31,20 @@ export function PropertiesListing({
   const searchParams = useSearchParams();
   const locationSlug = searchParams.get("location");
   const propertySlug = searchParams.get("property");
+  const searchParamsKey = searchParams.toString();
 
   const [filters, setFilters] = useState<PropertyFilters>(DEFAULT_FILTERS);
   const [sort, setSort] = useState<SortOption>("newest");
   const [view, setView] = useState<ViewMode>("grid");
   const [filtersOpen, setFiltersOpen] = useState(false);
+
+  useEffect(() => {
+    const fromUrl = buildFiltersFromSearchParams(searchParams);
+    if (Object.keys(fromUrl).length === 0) return;
+
+    setFilters((current) => ({ ...current, ...fromUrl }));
+    setFiltersOpen(true);
+  }, [searchParams, searchParamsKey]);
 
   const results = useMemo(
     () =>

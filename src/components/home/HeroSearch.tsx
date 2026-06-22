@@ -4,22 +4,20 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { HeroDropdown } from "@/components/home/HeroDropdown";
 import { useHasMounted } from "@/hooks/useHasMounted";
+import { PROPERTY_TYPE_OPTIONS } from "@/lib/data/properties";
+import {
+  HERO_PRICE_RANGE_OPTIONS,
+  resolveHeroLocationQuery,
+} from "@/lib/gallery/filters";
 
-const PROPERTY_TYPE_OPTIONS = [
-  { value: "house", label: "House" },
-  { value: "apartment", label: "Apartment" },
-  { value: "penthouse", label: "Penthouse" },
-  { value: "freestanding", label: "Freestanding" },
-  { value: "townhouse", label: "Townhouse" },
-  { value: "estate", label: "Estate" },
-];
-
-const PRICE_RANGE_OPTIONS = [
-  { value: "0-2000000", label: "Under R 2M" },
-  { value: "2000000-5000000", label: "R 2M – R 5M" },
-  { value: "5000000-10000000", label: "R 5M – R 10M" },
-  { value: "10000000-20000000", label: "R 10M – R 20M" },
-  { value: "20000000+", label: "R 20M+" },
+const HERO_PROPERTY_TYPE_OPTIONS = [
+  { value: "", label: "Any type" },
+  ...PROPERTY_TYPE_OPTIONS.filter((option) => option.value !== "any").map(
+    (option) => ({
+      value: option.value,
+      label: option.label,
+    }),
+  ),
 ];
 
 function FilterIcon() {
@@ -63,7 +61,7 @@ function HouseIcon() {
 function PriceIcon() {
   return (
     <svg
-      className="h-6 w-6 shrink-0 text-hero-text/80"
+      className="h-5 w-5 shrink-0 text-hero-text/80"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -98,6 +96,8 @@ function SearchIcon() {
   );
 }
 
+type OpenDropdown = "type" | "price" | null;
+
 export function HeroSearch() {
   const mounted = useHasMounted();
   const router = useRouter();
@@ -106,9 +106,15 @@ export function HeroSearch() {
   const [propertyType, setPropertyType] = useState("");
   const [priceRange, setPriceRange] = useState("");
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<OpenDropdown>(null);
+  const [typeHighlight, setTypeHighlight] = useState(0);
+  const [priceHighlight, setPriceHighlight] = useState(0);
 
   useEffect(() => {
-    if (!filtersOpen) return;
+    if (!filtersOpen) {
+      setOpenDropdown(null);
+      return;
+    }
 
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -116,6 +122,7 @@ export function HeroSearch() {
         !containerRef.current.contains(event.target as Node)
       ) {
         setFiltersOpen(false);
+        setOpenDropdown(null);
       }
     }
 
@@ -125,8 +132,18 @@ export function HeroSearch() {
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    setOpenDropdown(null);
+
     const params = new URLSearchParams();
-    if (location.trim()) params.set("location", location.trim());
+
+    const resolvedLocation = resolveHeroLocationQuery(location);
+    if (resolvedLocation.locationSlug) {
+      params.set("location", resolvedLocation.locationSlug);
+    }
+    if (resolvedLocation.searchText) {
+      params.set("search", resolvedLocation.searchText);
+    }
+
     if (propertyType) params.set("type", propertyType);
     if (priceRange) params.set("price", priceRange);
 
@@ -134,10 +151,17 @@ export function HeroSearch() {
     router.push(query ? `/gallery?${query}` : "/gallery");
   }
 
+  function toggleFilters() {
+    setFiltersOpen((open) => {
+      if (open) setOpenDropdown(null);
+      return !open;
+    });
+  }
+
   if (!mounted) {
     return (
       <div
-        className="mt-6 h-[8.75rem] max-w-2xl animate-pulse rounded-xl bg-white/10 sm:mt-8 sm:h-14"
+        className="mt-6 h-14 max-w-2xl animate-pulse rounded-xl bg-white/10 sm:mt-8"
         aria-hidden="true"
       />
     );
@@ -146,9 +170,7 @@ export function HeroSearch() {
   return (
     <div
       ref={containerRef}
-      className={`mt-6 w-full overflow-visible transition-all duration-300 ease-in-out sm:mt-8 ${
-        filtersOpen ? "max-w-4xl" : "max-w-2xl"
-      }`}
+      className="relative z-20 mt-6 w-full max-w-2xl overflow-visible transition-all duration-300 ease-in-out sm:mt-8"
     >
       <form
         onSubmit={handleSubmit}
@@ -156,91 +178,90 @@ export function HeroSearch() {
         role="search"
         aria-label="Search properties"
       >
-        <div className="hero-search-row">
-          <svg
-            className="h-5 w-5 shrink-0 text-hero-text/80"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={1.5}
-              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-            />
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={1.5}
-              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-            />
-          </svg>
-
-          <span className="hero-search-divider" aria-hidden="true" />
-
-          <label htmlFor="hero-location" className="sr-only">
-            Location
-          </label>
-          <input
-            id="hero-location"
-            type="text"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="Camps Bay, Sandton, Umhlanga..."
-            suppressHydrationWarning
-            className="min-w-0 flex-1 bg-transparent text-sm text-foreground placeholder:text-foreground/45 focus:outline-none sm:text-[0.9375rem]"
-          />
-        </div>
-
-        {filtersOpen ? (
-          <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:gap-0">
-            <span className="hero-search-divider" aria-hidden="true" />
-
-            <HeroDropdown
-              id="hero-type"
-              label="Property Type"
-              value={propertyType}
-              options={PROPERTY_TYPE_OPTIONS}
-              onChange={setPropertyType}
-              icon={<HouseIcon />}
-            />
+        <div className="hero-search-fields">
+          <div className="hero-search-row min-w-0 flex-1">
+            <svg
+              className="h-5 w-5 shrink-0 text-hero-text/80"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+            </svg>
 
             <span className="hero-search-divider" aria-hidden="true" />
 
-            <HeroDropdown
-              id="hero-price"
-              label="Price Range"
-              value={priceRange}
-              options={PRICE_RANGE_OPTIONS}
-              onChange={setPriceRange}
-              icon={<PriceIcon />}
+            <label htmlFor="hero-location" className="sr-only">
+              Location
+            </label>
+            <input
+              id="hero-location"
+              type="text"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              placeholder="Camps Bay, Sandton, Umhlanga..."
+              suppressHydrationWarning
+              className="min-w-0 flex-1 bg-transparent text-sm text-hero-text placeholder:text-hero-text/45 focus:outline-none sm:text-[0.9375rem]"
             />
           </div>
-        ) : null}
+
+          {filtersOpen ? (
+            <>
+              <span className="hero-search-divider" aria-hidden="true" />
+
+              <HeroDropdown
+                id="hero-type"
+                label="Property Type"
+                value={propertyType}
+                options={HERO_PROPERTY_TYPE_OPTIONS}
+                onChange={setPropertyType}
+                icon={<HouseIcon />}
+                isOpen={openDropdown === "type"}
+                onOpenChange={(open) => setOpenDropdown(open ? "type" : null)}
+                highlightedIndex={typeHighlight}
+                onHighlightChange={setTypeHighlight}
+              />
+
+              <span className="hero-search-divider" aria-hidden="true" />
+
+              <HeroDropdown
+                id="hero-price"
+                label="Price Range"
+                value={priceRange}
+                options={[...HERO_PRICE_RANGE_OPTIONS]}
+                onChange={setPriceRange}
+                icon={<PriceIcon />}
+                isOpen={openDropdown === "price"}
+                onOpenChange={(open) => setOpenDropdown(open ? "price" : null)}
+                highlightedIndex={priceHighlight}
+                onHighlightChange={setPriceHighlight}
+              />
+            </>
+          ) : null}
+        </div>
 
         <div className="hero-search-actions">
-          {!filtersOpen ? (
-            <button
-              type="button"
-              className="btn-filter"
-              onClick={() => setFiltersOpen(true)}
-              aria-expanded={filtersOpen}
-              aria-label="Filter properties"
-            >
-              <FilterIcon />
-            </button>
-          ) : (
-            <button
-              type="button"
-              className="btn-filter sm:hidden"
-              onClick={() => setFiltersOpen(false)}
-              aria-label="Close filters"
-            >
-              <FilterIcon />
-            </button>
-          )}
+          <button
+            type="button"
+            className="btn-filter"
+            onClick={toggleFilters}
+            aria-expanded={filtersOpen}
+            aria-label={filtersOpen ? "Close filters" : "Filter properties"}
+          >
+            <FilterIcon />
+          </button>
 
           <button type="submit" className="btn-search">
             <SearchIcon />

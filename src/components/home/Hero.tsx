@@ -5,8 +5,8 @@ import { HeroTagline } from "@/components/home/HeroTagline";
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-dvh snap-start snap-always flex-col justify-end overflow-hidden bg-charcoal-hero sm:justify-center">
-      <div className="absolute inset-0 z-0">
+    <section className="relative flex min-h-dvh snap-start snap-always flex-col justify-end bg-charcoal-hero sm:justify-center">
+      <div className="absolute inset-0 z-0 overflow-hidden">
         <HeroSlideshow />
       </div>
 

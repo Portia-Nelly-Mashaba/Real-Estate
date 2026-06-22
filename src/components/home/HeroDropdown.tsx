@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef } from "react";
 
 export interface DropdownOption {
   value: string;
@@ -14,12 +14,16 @@ interface HeroDropdownProps {
   options: DropdownOption[];
   onChange: (value: string) => void;
   icon: React.ReactNode;
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
+  highlightedIndex: number;
+  onHighlightChange: (index: number) => void;
 }
 
 function ChevronIcon({ open }: { open: boolean }) {
   return (
     <svg
-      className={`h-3.5 w-3.5 shrink-0 text-foreground/50 transition-transform duration-200 ${
+      className={`h-3.5 w-3.5 shrink-0 text-hero-text/70 transition-transform duration-200 ${
         open ? "rotate-180" : ""
       }`}
       fill="none"
@@ -44,64 +48,66 @@ export function HeroDropdown({
   options,
   onChange,
   icon,
+  isOpen,
+  onOpenChange,
+  highlightedIndex,
+  onHighlightChange,
 }: HeroDropdownProps) {
   const listboxId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
-  const [open, setOpen] = useState(false);
-  const [highlightedIndex, setHighlightedIndex] = useState(0);
 
   const selectedOption = options.find((opt) => opt.value === value);
   const displayLabel = selectedOption?.label ?? label;
 
   useEffect(() => {
-    if (!open) return;
+    if (!isOpen) return;
 
     function handleClickOutside(event: MouseEvent) {
       if (rootRef.current && !rootRef.current.contains(event.target as Node)) {
-        setOpen(false);
+        onOpenChange(false);
       }
     }
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [open]);
+  }, [isOpen, onOpenChange]);
 
   useEffect(() => {
-    if (open) {
+    if (isOpen) {
       const selectedIndex = options.findIndex((opt) => opt.value === value);
-      setHighlightedIndex(selectedIndex >= 0 ? selectedIndex : 0);
+      onHighlightChange(selectedIndex >= 0 ? selectedIndex : 0);
     }
-  }, [open, options, value]);
+  }, [isOpen, options, value, onHighlightChange]);
 
   function selectOption(option: DropdownOption) {
     onChange(option.value);
-    setOpen(false);
+    onOpenChange(false);
   }
 
   function handleKeyDown(event: React.KeyboardEvent) {
-    if (!open) {
+    if (!isOpen) {
       if (event.key === "Enter" || event.key === " " || event.key === "ArrowDown") {
         event.preventDefault();
-        setOpen(true);
+        onOpenChange(true);
       }
       return;
     }
 
     if (event.key === "Escape") {
       event.preventDefault();
-      setOpen(false);
+      onOpenChange(false);
       return;
     }
 
     if (event.key === "ArrowDown") {
       event.preventDefault();
-      setHighlightedIndex((i) => (i + 1) % options.length);
+      onHighlightChange((highlightedIndex + 1) % options.length);
       return;
     }
 
     if (event.key === "ArrowUp") {
       event.preventDefault();
-      setHighlightedIndex((i) => (i - 1 + options.length) % options.length);
+      onHighlightChange((highlightedIndex - 1 + options.length) % options.length);
       return;
     }
 
@@ -112,31 +118,33 @@ export function HeroDropdown({
   }
 
   return (
-    <div ref={rootRef} className="hero-dropdown relative w-full shrink-0 sm:w-auto">
+    <div ref={rootRef} className="hero-dropdown">
       <button
         id={id}
         type="button"
         className="hero-dropdown-trigger"
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={() => onOpenChange(!isOpen)}
         onKeyDown={handleKeyDown}
         aria-haspopup="listbox"
-        aria-expanded={open}
+        aria-expanded={isOpen}
         aria-controls={listboxId}
       >
         {icon}
-        <span className="inline-flex min-w-0 items-center gap-2.5">
+        <span className="inline-flex min-w-0 items-center gap-2">
           <span
             className={`truncate text-left text-sm sm:text-[0.9375rem] ${
-              selectedOption ? "text-foreground" : "text-foreground/45"
+              selectedOption && value
+                ? "text-hero-text"
+                : "text-hero-text/70"
             }`}
           >
             {displayLabel}
           </span>
-          <ChevronIcon open={open} />
+          <ChevronIcon open={isOpen} />
         </span>
       </button>
 
-      {open && (
+      {isOpen ? (
         <ul
           id={listboxId}
           role="listbox"
@@ -145,17 +153,23 @@ export function HeroDropdown({
         >
           {options.map((option, index) => {
             const isHighlighted = highlightedIndex === index;
+            const isSelected = value === option.value;
+            const isActive = isHighlighted || isSelected;
+            const isFirst = index === 0;
+            const isLast = index === options.length - 1;
 
             return (
-              <li key={option.value} role="presentation">
+              <li key={option.value || "any"} role="presentation">
                 <button
                   type="button"
                   role="option"
-                  aria-selected={value === option.value}
+                  aria-selected={isSelected}
                   className={`hero-dropdown-option ${
-                    isHighlighted ? "hero-dropdown-option-active" : ""
+                    isActive ? "hero-dropdown-option-active" : ""
+                  } ${isFirst && isActive ? "hero-dropdown-option-first" : ""} ${
+                    isLast && isActive ? "hero-dropdown-option-last" : ""
                   }`}
-                  onMouseEnter={() => setHighlightedIndex(index)}
+                  onMouseEnter={() => onHighlightChange(index)}
                   onClick={() => selectOption(option)}
                 >
                   {option.label}
@@ -164,7 +178,7 @@ export function HeroDropdown({
             );
           })}
         </ul>
-      )}
+      ) : null}
     </div>
   );
 }
